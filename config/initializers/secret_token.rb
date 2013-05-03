@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Kelasi::Application.config.secret_key_base = '5f02e57a65db780831938693b01a7c7aeac4fac91a90bed15bf45b8d4c461a06311f4b27a3a59d7e2167f679cb490a55c5da72b0c7f7072ddaf6e83a376a9578'
+Kelasi::Application.config.secret_key_base = 'a78e339da9263a2276e585dbe765ffef74291e3d78b97ca27968d1958b1b1abf6c9f6ca1d2baaaa455af4d3d3bc8813c7bb69b6cbf9cb2bbc5990af7843ff5f8'
