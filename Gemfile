@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0.rc2'
+gem 'rails', '4.0.0'
 
 gem 'devise', '3.0.0.rc'
 
@@ -45,7 +45,7 @@ end
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
@@ -53,4 +53,5 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'thin'
+gem 'rails_12factor'
+
