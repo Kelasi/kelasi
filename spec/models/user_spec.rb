@@ -20,4 +20,29 @@ describe User do
     subject.save
     expect(subject).to be_invalid
   end
+
+  context 'relations' do
+
+    before do
+      @user = User.create! do |u|
+        u.first_name = "foo"
+        u.last_name = "bar"
+        u.email = "foo@bar.com"
+        u.password = "12345678"
+      end
+      @uni = University.create! name: 'baz'
+      @atendance = Atendance.create! user: @user, university: @uni
+    end
+    subject {@user}
+
+    it 'should have atendances' do
+      expect(subject.respond_to? :atendances).to be_true
+      expect(subject.atendances).to eq [@atendance]
+    end
+
+    it 'should have universities' do
+      expect(subject.respond_to? :universities).to be_true
+      expect(subject.universities).to eq [@uni]
+    end
+  end
 end

@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :atendances
+  has_many :universities, through: :atendances
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
