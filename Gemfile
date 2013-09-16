@@ -7,12 +7,16 @@ gem 'rails', '4.0.0'
 gem 'devise', '3.0.0.rc'
 
 # Use sqlite3 as the database for Active Record
-group :development do
+group :development, :test do
 	gem 'sqlite3'
 end
 
 group :production do
 	gem 'pg'
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 2.0'
 end
 
 # Use SCSS for stylesheets
