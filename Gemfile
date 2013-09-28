@@ -4,11 +4,16 @@ ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 
-gem 'devise', '3.0.0.rc'
+gem 'devise', '~> 3.1.0'
 
 # Use sqlite3 as the database for Active Record
-group :development, :test do
-	gem 'sqlite3'
+group :development do
+  gem 'guard'
+  gem 'ruby_gntp'
+  gem 'guard-spork'
+  gem 'guard-rspec'
+  gem 'rack-livereload'
+  gem 'guard-livereload'
 end
 
 group :production do
@@ -16,7 +21,10 @@ group :production do
 end
 
 group :development, :test do
+	gem 'sqlite3'
   gem 'rspec-rails', '~> 2.0'
+  gem 'spork-rails'
+  gem 'jazz_hands'
 end
 
 # Use SCSS for stylesheets
