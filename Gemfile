@@ -25,6 +25,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 2.0'
   gem 'spork-rails'
   gem 'jazz_hands'
+  gem 'factory_girl_rails'
 end
 
 # Use SCSS for stylesheets
