@@ -33,6 +33,7 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.1.4)
+    cancan (1.6.10)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.0.9)
@@ -94,6 +95,8 @@ GEM
       childprocess (>= 0.2.3)
       guard (>= 1.1)
       spork (>= 0.8.4)
+    haml (4.0.3)
+      tilt
     hashr (0.0.22)
     hike (1.2.3)
     hirb (0.7.1)
@@ -263,6 +266,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cancan (~> 1.6.10)
   coffee-rails (~> 4.0.0)
   devise (~> 3.1.0)
   factory_girl_rails
@@ -270,6 +274,7 @@ DEPENDENCIES
   guard-livereload
   guard-rspec
   guard-spork
+  haml (~> 4.0.3)
   jazz_hands
   jbuilder (~> 1.0.1)
   jquery-rails
@@ -279,7 +284,7 @@ DEPENDENCIES
   rails_12factor
   rspec-rails (~> 2.0)
   ruby_gntp
-  sass-rails (~> 4.0.0.rc1)
+  sass-rails (~> 4.0.0)
   sdoc
   spork-rails
   sqlite3
