@@ -4,6 +4,8 @@ Kelasi::Application.routes.draw do
   namespace :frontend do
     get '/', to: 'pages#index'
   end
+
+  root to: 'frontend/pages#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
