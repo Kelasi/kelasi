@@ -45,6 +45,8 @@ gem 'haml', '~> 4.0.3'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
+gem 'angularjs-rails', '~> 1.2.0.rc2'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
