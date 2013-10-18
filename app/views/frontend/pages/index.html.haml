@@ -1,2 +1,30 @@
-%h1 Frontend::Pages#index
-%p Find me in app/views/frontend/pages/index.html.haml
+!!! 5
+
+= raw '<!--[if lt IE 7 ]> <html class="ie6" lang="en" ng-app> <![endif]-->'
+= raw '<!--[if IE 7 ]>    <html class="ie7" lang="en" ng-app> <![endif]-->'
+= raw '<!--[if IE 8 ]>    <html class="ie8" lang="en" ng-app> <![endif]-->'
+= raw '<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en" ng-app> <!--<![endif]-->'
+
+%head
+  %meta( charset="utf-8" )
+  %meta( name="viewport" content="width=device-width, initial-scale=1.0" )
+
+  %title= "Kelasi"
+
+  = stylesheet_link_tag "application", :media => "all"
+
+  -# = javascript_include_tag "vendor/custom.modernizr"
+  = csrf_meta_tags
+
+%body
+  %h1 Frontend::Pages#index
+  %p Find me in app/views/frontend/pages/index.html.haml
+  %div( ng-view )
+
+  = javascript_include_tag "application"
+
+= raw "</html>"
+
+-# <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+-# <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
