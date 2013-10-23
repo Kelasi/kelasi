@@ -1,5 +1,4 @@
 Kelasi::Application.routes.draw do
-  devise_for :users, skip: :all
 
   namespace :frontend do
     get '/', to: 'pages#index'
