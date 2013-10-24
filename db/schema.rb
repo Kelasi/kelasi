@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131018165701) do
+ActiveRecord::Schema.define(version: 20131024153812) do
 
   create_table "atendances", force: true do |t|
     t.integer  "user_id"
@@ -27,12 +27,13 @@ ActiveRecord::Schema.define(version: 20131018165701) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "email",              default: "", null: false
-    t.string   "encrypted_password", default: "", null: false
+    t.string   "email",            default: "", null: false
+    t.string   "crypted_password", default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "first_name",                      null: false
-    t.string   "last_name",                       null: false
+    t.string   "first_name",                    null: false
+    t.string   "last_name",                     null: false
+    t.string   "salt"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

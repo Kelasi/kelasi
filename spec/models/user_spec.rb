@@ -46,6 +46,8 @@ describe User do
 
     subject { User.search user.first_name }
 
+    before(:all) do User.tire.index.refresh end
+
     it 'should not contain root in json' do
       expect(User.include_root_in_json).to be_false
     end
