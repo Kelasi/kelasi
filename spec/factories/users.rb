@@ -1,9 +1,10 @@
 FactoryGirl.define do
   factory :user do
-    first_name "John"
-    last_name  "Doe"
-    password   "password"
-    email      "john.doe@example..com"
+    first_name            "John"
+    last_name             "Doe"
+    password              "password"
+    password_confirmation "password"
+    email                 "john.doe@example.com"
 
     factory :user_with_university do
       after(:create) do |user|

@@ -3,13 +3,8 @@ require 'spec_helper'
 describe University do
 
   before do
-    @user = User.create! do |u|
-      u.first_name = "foo"
-      u.last_name = "bar"
-      u.email = "foo@bar.com"
-      u.password = "12345678"
-    end
-    @uni = University.create! name: "baz"
+    @user = FactoryGirl.create :user
+    @uni = FactoryGirl.create :university
     @atendance = Atendance.create! user: @user, university: @uni
   end
   subject {@uni}

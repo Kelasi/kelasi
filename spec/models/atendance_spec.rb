@@ -3,13 +3,7 @@ require 'spec_helper'
 describe Atendance do
 
   before do
-    @user = User.create! do |u|
-      u.first_name = "foo"
-      u.last_name = "bar"
-      u.email = "foo@bar.com"
-      u.password = "12345678"
-    end
-    @user.universities.create! name: "baz"
+    @user = FactoryGirl.create :user_with_university
   end
   subject {@user.atendances.first}
 
