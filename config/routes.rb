@@ -1,5 +1,9 @@
 Kelasi::Application.routes.draw do
 
+  scope 'api_', module: :backend, defaults: {format: 'json'} do
+    resources :users, except: [:new, :edit, :delete]
+  end
+
   scope '/fe_', module: :frontend do
     get '/(:page)', to: 'pages#page'
   end

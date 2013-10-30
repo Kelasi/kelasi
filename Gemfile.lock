@@ -115,8 +115,9 @@ GEM
       pry-remote (>= 0.1.7)
       pry-stack_explorer (~> 0.4.9)
       railties (>= 3.0, < 5.0)
-    jbuilder (1.0.2)
+    jbuilder (1.5.2)
       activesupport (>= 3.0.0)
+      multi_json (>= 1.2.0)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -286,7 +287,7 @@ DEPENDENCIES
   guard-spork
   haml (~> 4.0.3)
   jazz_hands
-  jbuilder (~> 1.0.1)
+  jbuilder (~> 1.5.2)
   jquery-rails
   pg
   rack-livereload
