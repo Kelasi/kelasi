@@ -1,7 +1,8 @@
 Kelasi::Application.routes.draw do
 
   scope 'api_', module: :backend, defaults: {format: 'json'} do
-    resources :users, except: [:new, :edit, :delete]
+    resources :users
+    resource :session, only: [:show, :create, :destroy], controller: 'session'
   end
 
   scope '/fe_', module: :frontend do

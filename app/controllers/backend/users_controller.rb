@@ -4,15 +4,19 @@ class Backend::UsersController < Backend::BackendController
   end
 
   def show
-    @user = User.find params[:id]
+    @user = User.new
+    # @user = User.find params[:id]
   end
 
   def update
+    render json: {}
   end
 
   def create
+    render json: {}
   end
 
   def destroy
+    render json: {}
   end
 end

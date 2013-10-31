@@ -1,25 +1,16 @@
 require 'spec_helper'
 
-describe Backend::UserController do
-
-  describe "GET 'index'" do
-    it "returns http success" do
-      get 'index'
-      response.should be_success
-    end
-  end
+describe Backend::SessionController do
 
   describe "GET 'show'" do
     it "returns http success" do
       get 'show'
       response.should be_success
     end
-  end
 
-  describe "GET 'update'" do
-    it "returns http success" do
-      get 'update'
-      response.should be_success
+    it "should render the correct template" do
+      get 'show'
+      expect(response).to render_template "backend/session/show"
     end
   end
 
