@@ -1,9 +1,9 @@
 !!! 5
 
-= raw '<!--[if lt IE 7 ]> <html class="ie6" lang="en" ng-app> <![endif]-->'
-= raw '<!--[if IE 7 ]>    <html class="ie7" lang="en" ng-app> <![endif]-->'
-= raw '<!--[if IE 8 ]>    <html class="ie8" lang="en" ng-app> <![endif]-->'
-= raw '<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en" ng-app> <!--<![endif]-->'
+= raw '<!--[if lt IE 7 ]> <html class="ie6" lang="en" ng-app="kelasi"> <![endif]-->'
+= raw '<!--[if IE 7 ]>    <html class="ie7" lang="en" ng-app="kelasi"> <![endif]-->'
+= raw '<!--[if IE 8 ]>    <html class="ie8" lang="en" ng-app="kelasi"> <![endif]-->'
+= raw '<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en" ng-app="kelasi"> <!--<![endif]-->'
 
 %head
   %meta( charset="utf-8" )
@@ -17,9 +17,10 @@
   = csrf_meta_tags
 
 %body
-  %h1 Frontend::Pages#index
-  %p Find me in app/views/frontend/pages/index.html.haml
-  %div( ng-view )
+  %div( ui-view ) Loading. Please wait...
+
+  %a(ui-sref='admin.users') User Management
+  %a(ui-sref='register') Register
 
   = javascript_include_tag "application"
 
