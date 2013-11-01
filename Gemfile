@@ -14,6 +14,7 @@ group :development do
   gem 'guard-rspec'
   gem 'rack-livereload'
   gem 'guard-livereload'
+  gem 'guard-teaspoon'
 end
 
 group :production do
@@ -26,6 +27,7 @@ group :development, :test do
   gem 'spork-rails'
   gem 'jazz_hands'
   gem 'factory_girl_rails'
+  gem 'teaspoon'
 end
 
 # Use SCSS for stylesheets
