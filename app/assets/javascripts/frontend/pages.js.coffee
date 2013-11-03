@@ -5,12 +5,8 @@
 
 kelasi = angular.module 'kelasi', ['ui.router']
 
-kelasi.config ['$httpProvider', '$stateProvider', '$urlRouterProvider', '$locationProvider',
-  ($httpProvider, $stateProvider, $urlRouterProvider, $locationProvider) ->
-
-    token = $("meta[name='csrf-token']").attr("content")
-    $httpProvider.defaults.headers.common["X-CSRF-Token"] = token
-    $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest'
+kelasi.config ['$stateProvider', '$urlRouterProvider', '$locationProvider',
+  ($stateProvider, $urlRouterProvider, $locationProvider) ->
 
     $locationProvider.html5Mode on
 
