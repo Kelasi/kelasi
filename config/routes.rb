@@ -3,6 +3,7 @@ Kelasi::Application.routes.draw do
   scope 'api_', module: :backend, defaults: {format: 'json'} do
     resources :users
     resource :session, only: [:show, :create, :destroy], controller: 'session'
+    post 'search', to: 'search#search'
   end
 
   scope '/fe_', module: :frontend do
