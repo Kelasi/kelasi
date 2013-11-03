@@ -7,7 +7,7 @@ Kelasi::Application.routes.draw do
   end
 
   scope '/fe_', module: :frontend do
-    get '/(:page)', to: 'pages#page'
+    get '/(*page)', to: 'pages#page'
   end
 
   root to: 'frontend/pages#page'

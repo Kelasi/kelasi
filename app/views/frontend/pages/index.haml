@@ -16,10 +16,11 @@
   -# = javascript_include_tag "vendor/custom.modernizr"
 
 %body
-  %div( ui-view ) Loading. Please wait...
-
+  %a(ui-sref='home') Home
   %a(ui-sref='admin.users') User Management
-  %a(ui-sref='register') Register
+  %a(ui-sref='register.step1') Register
+
+  %div( ui-view ) Loading. Please wait...
 
   = javascript_include_tag "application"
 

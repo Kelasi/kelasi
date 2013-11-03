@@ -14,16 +14,19 @@ kelasi.config ['$stateProvider', '$urlRouterProvider', '$locationProvider',
 
     $stateProvider
       .state('home',
-        url: '/home',
-        template: 'HOME'
+        url: '/home'
+        templateUrl: '/fe_/home'
       ).state('admin',
-        url: '/admin',
-        template: '<h1>Admin</h1><ui-view></ui-view>'
+        url: '/admin'
+        templateUrl: '/fe_/admin'
       ).state('admin.users',
-        url: '/users',
-        templateUrl: '/fe_/user_management'
+        url: '/users'
+        templateUrl: '/fe_/admin/users'
       ).state('register',
-        url: '/register',
+        url: '/register'
         templateUrl: '/fe_/register'
+      ).state('register.step1',
+        url: '/step1'
+        templateUrl: '/fe_/register/step1'
       )
 ]
