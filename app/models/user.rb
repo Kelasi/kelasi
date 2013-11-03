@@ -29,4 +29,16 @@ class User < ActiveRecord::Base
       []
     end
   end
+
+  def self.search_user params
+    search load: true do
+      query do
+        boolean do
+          must { string "first_name:#{params[:first_name]}" } if params[:first_name]
+          must { string "last_name:#{params[:last_name]}" } if params[:last_name]
+          must { string "universities:#{params[:university]}" } if params[:university]
+        end
+      end
+    end.results
+  end
 end

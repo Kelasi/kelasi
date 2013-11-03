@@ -90,5 +90,23 @@ describe User do
       subject = User.search "universities:#{university.name}", load: true
       expect(subject.results).to include user
     end
+
+    describe :search_user do
+
+      it "should search by first name" do
+        subject = User.search_user first_name: user.first_name
+        expect(subject).to include user
+      end
+
+      it "should search by last name" do
+        subject = User.search_user last_name: user.last_name
+        expect(subject).to include user
+      end
+
+      it "should search by university name" do
+        subject = User.search_user university: university.name
+        expect(subject).to include user
+      end
+    end
   end
 end
