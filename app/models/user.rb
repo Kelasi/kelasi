@@ -34,9 +34,9 @@ class User < ActiveRecord::Base
     search load: true do
       query do
         boolean do
-          must { string "first_name:#{params[:first_name]}" } if params[:first_name]
-          must { string "last_name:#{params[:last_name]}" } if params[:last_name]
-          must { string "universities:#{params[:university]}" } if params[:university]
+          must { string "first_name:#{params[:first_name]}" } unless params[:first_name].blank?
+          must { string "last_name:#{params[:last_name]}" } unless params[:last_name].blank?
+          must { string "universities:#{params[:university]}" } unless params[:university].blank?
         end
       end
     end.results

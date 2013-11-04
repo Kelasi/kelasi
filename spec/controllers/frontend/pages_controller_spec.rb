@@ -14,8 +14,8 @@ describe Frontend::PagesController do
     end
 
     it "should render correct template based on page param" do
-      get 'page', page: 'user_management'
-      expect(response).to render_template('frontend/pages/user_management.haml')
+      get 'page', page: 'admin/users'
+      expect(response).to render_template('frontend/pages/admin/users.haml')
     end
   end
 

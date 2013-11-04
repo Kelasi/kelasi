@@ -1,0 +1,14 @@
+%p Finish your registeration
+%form
+  %p
+    First Name
+    %input(ng-model='data.user.fname')
+  %p
+    Last Name
+    %input(ng-model='data.user.lname')
+  %p
+    University
+    %input(ng-model='data.user.uniname')
+%a(ui-sref='register.step2') Previous
+%a(ui-sref='home') Save
+

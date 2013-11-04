@@ -4,3 +4,7 @@
 %ul
   %li(ng-repeat="user in users")
     {{user}}
+    %a(href='' ng-click='delete_(user)') delete
+    %a(href='' ng-click='edit(user)') edit
+  %li
+    %a(href='' ng-click='newUser()') New user

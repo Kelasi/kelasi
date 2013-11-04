@@ -1,1 +1,15 @@
-%p This is first step
+%p Who do you know in this site?
+%form
+  %p
+    First Name:
+    %input(ng-model='fname')
+
+  %p
+    Last Name:
+    %input(ng-model='lname')
+
+  %p
+    University:
+    %input(ng-model='uniname')
+%a(ui-sref='register.step2' ng-click='search()') Next
+
