@@ -15,6 +15,7 @@ group :development do
   gem 'rack-livereload'
   gem 'guard-livereload'
   gem 'guard-teaspoon'
+  gem 'coffee-rails-source-maps'
 end
 
 group :production do
