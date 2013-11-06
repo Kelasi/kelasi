@@ -21,7 +21,7 @@ describe User do
 
   context 'relations' do
 
-    let(:atendance) { FactoryGirl.create :atendance }
+    let(:atendance) { FactoryGirl.create :current_attendance }
     let(:user) { atendance.user }
     let(:university) { atendance.university }
 
@@ -35,6 +35,10 @@ describe User do
     it 'should have universities' do
       expect(subject.respond_to? :universities).to be_true
       expect(subject.universities).to eq [university]
+    end
+
+    it "should return currently attending universities" do
+      expect(subject.currently_attending).to include university
     end
   end
 

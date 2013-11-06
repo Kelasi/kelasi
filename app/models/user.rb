@@ -41,4 +41,8 @@ class User < ActiveRecord::Base
       end
     end.results
   end
+
+  def currently_attending
+    Atendance.where(currently_attending: true, user: self).includes(:university).map(&:university)
+  end
 end

@@ -19,3 +19,6 @@
 .ruby-gemset
 
 /bin
+
+/public/assets/source_maps
+
