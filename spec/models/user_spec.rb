@@ -1,5 +1,6 @@
 
 require 'spec_helper'
+require 'uni_normalize'
 
 describe User do
 
@@ -44,13 +45,16 @@ describe User do
 
   context 'tire' do
 
-    let(:atendance) { FactoryGirl.create :atendance }
+    let(:atendance) { FactoryGirl.create :current_attendance }
     let(:user) { atendance.user }
     let(:university) { atendance.university }
 
     subject { User.search user.first_name }
 
     before { User.tire.index.refresh }
+    before do
+      Tire::Configuration.client.get "#{Tire::Configuration.url}/_cluster/health?wait_for_status=yellow"
+    end
 
     it 'should not contain root in json' do
       expect(User.include_root_in_json).to be_false
@@ -77,7 +81,7 @@ describe User do
 
     it 'should have universities in search results' do
       expect(subject.results.last.respond_to? :universities).to be_true
-      expect(subject.results.map {|m| m.universities}).to include university.name
+      expect(subject.results.map {|m| m.universities}.flatten).to include uni_normalize university.name
     end
 
     it 'shoult be able to search by first name' do
@@ -91,7 +95,7 @@ describe User do
     end
 
     it 'should be able to search by university name' do
-      subject = User.search "universities:#{university.name}", load: true
+      subject = User.search %Q(universities:*#{uni_normalize university.name}*), load: true
       expect(subject.results).to include user
     end
 

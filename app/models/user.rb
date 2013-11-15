@@ -1,3 +1,5 @@
+require 'uni_normalize'
+
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
   has_many :atendances
@@ -17,32 +19,36 @@ class User < ActiveRecord::Base
     indexes :id, index: :not_analyzed
     indexes :first_name, type: 'string'
     indexes :last_name, type: 'string'
-    indexes :universities, as: proc {uni_names.join '|'}
+    indexes :universities, as: proc { uni_names }
+    indexes :current_universities, as: proc { uni_names true }
   end
 
   after_touch() { tire.update_index }
 
-  def uni_names
-    unless universities.empty?
-      universities.map {|u| u.name}
-    else
-      []
-    end
+  def uni_names current = false
+    unis = universities
+    unis = currently_attending if current
+    return [] if unis.empty?
+    unis.map {|u| uni_normalize u.name}
   end
 
   def self.search_user params
+    fname = params[:first_name]
+    lname = params[:last_name]
+    uname = uni_normalize params[:university]
+    return [] if fname.blank? and lname.blank? and uname.blank?
     search load: true do
       query do
         boolean do
-          must { string "first_name:#{params[:first_name]}" } unless params[:first_name].blank?
-          must { string "last_name:#{params[:last_name]}" } unless params[:last_name].blank?
-          must { string "universities:#{params[:university]}" } unless params[:university].blank?
+          must { string "first_name:#{fname}" } unless params[:first_name].blank?
+          must { string "last_name:#{lname}" } unless params[:last_name].blank?
+          must { terms :current_universities, [ uname ] } unless params[:university].blank?
         end
       end
     end.results
   end
 
   def currently_attending
-    Atendance.where(currently_attending: true, user: self).includes(:university).map(&:university)
+    self.atendances.where(currently_attending: true).includes(:university).map(&:university)
   end
 end
