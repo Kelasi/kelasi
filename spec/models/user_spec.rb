@@ -4,27 +4,36 @@ require 'uni_normalize'
 
 describe User do
 
-  let(:user) { FactoryGirl.build :user }
+  let(:atendance) { FactoryGirl.create :current_attendance }
+  let(:user) { atendance.user }
+  let(:university) { atendance.university }
 
-  subject { user }
+  context 'validations' do
+    subject { FactoryGirl.build :user }
 
-  it "Should have a first name" do
-    subject.first_name = ""
-    subject.save
-    expect(subject).to be_invalid
-  end
+    it "should be valid with default attributes" do
+      expect(subject).to be_valid
+    end
 
-  it "Should have a last name" do
-    subject.last_name = ""
-    subject.save
-    expect(subject).to be_invalid
+    it "Should have a first name" do
+      subject.first_name = ""
+      expect(subject).to be_invalid
+    end
+
+    it "Should have a last name" do
+      subject.last_name = ""
+      expect(subject).to be_invalid
+    end
+
+    it "should have an introducer" do
+      subject.introducer = nil
+      expect(subject).to be_invalid
+    end
   end
 
   context 'relations' do
 
-    let(:atendance) { FactoryGirl.create :current_attendance }
-    let(:user) { atendance.user }
-    let(:university) { atendance.university }
+    let(:introduced_user) { FactoryGirl.create :introduced_user, introducer: user }
 
     subject { user }
 
@@ -41,13 +50,14 @@ describe User do
     it "should return currently attending universities" do
       expect(subject.currently_attending).to include university
     end
+
+    it "should have an introducer" do
+      expect(introduced_user.respond_to? :introducer).to be_true
+      expect(introduced_user.introducer).to eq user
+    end
   end
 
   context 'tire' do
-
-    let(:atendance) { FactoryGirl.create :current_attendance }
-    let(:user) { atendance.user }
-    let(:university) { atendance.university }
 
     subject { User.search user.first_name }
 

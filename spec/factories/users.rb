@@ -1,12 +1,17 @@
 FactoryGirl.define do
-  factory :user do
+  sequence :email do |n|
+    "bid#{n}@bood.bad"
+  end
+
+  factory :user, aliases: [:introducer, :introduced_user] do
     first_name            "John"
     last_name             "Doe"
     password              "password"
     password_confirmation "password"
     salt                  "asdasdastr4325234324sdfds"
     crypted_password      { Sorcery::CryptoProviders::BCrypt.encrypt("secret", salt) }
-    email                 "john.doe@example.com"
+    email
+    introducer            { u = FactoryGirl.build :user, introducer: nil; u.save validate: false; u }
 
     factory :user_with_university do
       after(:create) do |user|
