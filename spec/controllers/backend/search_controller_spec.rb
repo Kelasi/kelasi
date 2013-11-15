@@ -10,7 +10,7 @@ describe Backend::SearchController do
       User.tire.index.refresh
     end
 
-    it "should return user by passing params" do
+    it "should return user by passing params", :vcr do
       post 'search',
         fname: user.first_name,
         lname: user.last_name,

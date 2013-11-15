@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.1'
 
 gem 'sorcery'
 
@@ -29,6 +29,8 @@ group :development, :test do
   gem 'jazz_hands'
   gem 'factory_girl_rails'
   gem 'teaspoon'
+  gem 'webmock'
+  gem 'vcr'
 end
 
 # Use SCSS for stylesheets
@@ -48,7 +50,7 @@ gem 'haml', '~> 4.0.3'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-gem 'angularjs-rails', '~> 1.2.0.rc2'
+gem 'angularjs-rails', '~> 1.2.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
