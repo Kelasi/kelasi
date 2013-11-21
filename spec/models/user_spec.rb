@@ -11,21 +11,21 @@ describe User do
   context 'validations' do
     subject { FactoryGirl.build :user }
 
-    it "should be valid with default attributes" do
+    it "should be valid with default attributes", :vcr do
       expect(subject).to be_valid
     end
 
-    it "Should have a first name" do
+    it "Should have a first name", :vcr do
       subject.first_name = ""
       expect(subject).to be_invalid
     end
 
-    it "Should have a last name" do
+    it "Should have a last name", :vcr do
       subject.last_name = ""
       expect(subject).to be_invalid
     end
 
-    it "should have an introducer" do
+    it "should have an introducer", :vcr do
       subject.introducer = nil
       expect(subject).to be_invalid
     end
@@ -37,21 +37,21 @@ describe User do
 
     subject { user }
 
-    it 'should have atendances' do
+    it 'should have atendances', :vcr do
       expect(subject.respond_to? :atendances).to be_true
       expect(subject.atendances).to eq [atendance]
     end
 
-    it 'should have universities' do
+    it 'should have universities', :vcr do
       expect(subject.respond_to? :universities).to be_true
       expect(subject.universities).to eq [university]
     end
 
-    it "should return currently attending universities" do
+    it "should return currently attending universities", :vcr do
       expect(subject.currently_attending).to include university
     end
 
-    it "should have an introducer" do
+    it "should have an introducer", :vcr do
       expect(introduced_user.respond_to? :introducer).to be_true
       expect(introduced_user.introducer).to eq user
     end
@@ -61,67 +61,62 @@ describe User do
 
     subject { User.search user.first_name }
 
-    before { User.tire.index.refresh }
-    before do
-      Tire::Configuration.client.get "#{Tire::Configuration.url}/_cluster/health?wait_for_status=yellow"
-    end
-
-    it 'should not contain root in json' do
+    it 'should not contain root in json', :vcr do
       expect(User.include_root_in_json).to be_false
     end
 
-    it 'should have Tire functionality' do
+    it 'should have Tire functionality', :vcr do
       expect(subject.results.map {|m| m.id}).to include user.id.to_s
     end
 
-    it 'should have id in search results' do
+    it 'should have id in search results', :vcr do
       expect(subject.results.last.respond_to? :id).to be_true
       expect(subject.results.map {|m| m.id}).to include user.id.to_s
     end
 
-    it 'should have first_name in search results' do
+    it 'should have first_name in search results', :vcr do
       expect(subject.results.last.respond_to? :first_name).to be_true
       expect(subject.results.map {|m| m.first_name}).to include user.first_name
     end
 
-    it 'should have last_name in search results' do
+    it 'should have last_name in search results', :vcr do
       expect(subject.results.last.respond_to? :last_name).to be_true
       expect(subject.results.map {|m| m.last_name}).to include user.last_name
     end
 
-    it 'should have universities in search results' do
+    it 'should have universities in search results', :vcr do
       expect(subject.results.last.respond_to? :universities).to be_true
       expect(subject.results.map {|m| m.universities}.flatten).to include uni_normalize university.name
     end
 
-    it 'shoult be able to search by first name' do
+    it 'shoult be able to search by first name', :vcr do
       subject = User.search "first_name:#{user.first_name}", load: true
       expect(subject.results).to include user
     end
 
-    it 'should be able to search by last name' do
+    it 'should be able to search by last name', :vcr do
       subject = User.search "last_name:#{user.last_name}", load: true
       expect(subject.results).to include user
     end
 
-    it 'should be able to search by university name' do
+    it 'should be able to search by university name', :vcr do
       subject = User.search %Q(universities:*#{uni_normalize university.name}*), load: true
       expect(subject.results).to include user
     end
 
     describe :search_user do
 
-      it "should search by first name" do
+      it "should search by first name", :vcr do
         subject = User.search_user first_name: user.first_name
         expect(subject).to include user
       end
 
-      it "should search by last name" do
+      it "should search by last name", :vcr do
         subject = User.search_user last_name: user.last_name
         expect(subject).to include user
       end
 
-      it "should search by university name" do
+      it "should search by university name", :vcr do
         subject = User.search_user university: university.name
         expect(subject).to include user
       end

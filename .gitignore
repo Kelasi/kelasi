@@ -21,4 +21,5 @@
 /bin
 
 /public/assets/source_maps
+.rvm/
 
