@@ -7,7 +7,6 @@ FactoryGirl.define do
     first_name            "John"
     last_name             "Doe"
     password              "password"
-    password_confirmation "password"
     salt                  "asdasdastr4325234324sdfds"
     crypted_password      { Sorcery::CryptoProviders::BCrypt.encrypt("secret", salt) }
     email
