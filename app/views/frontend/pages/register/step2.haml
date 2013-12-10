@@ -1,8 +1,8 @@
 %p Which one of these persons you know?
 %div
-  %div(ng-repeat='user in data.users')
-    %input(type='radio' ng-model='$parent.data.selectedUser' value="{{user.id}}" name='user')
-    {{user.email}}
+  %div(ng-repeat='user in cntl.users')
+    %input(type='radio' ng-model='cntl.data.user.introducer' value="{{user.id}}" name='user')
+    {{user.first_name}} {{user.last_name}} - {{user.email}}
 %a(ui-sref='register.step1') Previous
 %a(ui-sref='register.step3') Next
 

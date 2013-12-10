@@ -2,14 +2,15 @@
 %form
   %p
     First Name:
-    %input(ng-model='fname')
+    %input(ng-model='cntl.data.search.fname')
 
   %p
     Last Name:
-    %input(ng-model='lname')
+    %input(ng-model='cntl.data.search.lname')
 
   %p
     University:
-    %input(ng-model='uniname')
-%a(ui-sref='register.step2' ng-click='search()') Next
+    %input(ng-model='cntl.data.search.university')
+
+%a(ui-sref='register.step2') Next
 

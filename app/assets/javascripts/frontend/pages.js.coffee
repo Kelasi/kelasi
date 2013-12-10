@@ -32,14 +32,22 @@ kelasi.config ['$stateProvider', '$urlRouterProvider', '$locationProvider',
       ).state('register.step1',
         url: '/step1'
         templateUrl: '/fe_/register/step1'
-        controller: 'registerStep1Cntl'
+        controller: 'registerStep1Cntl as cntl'
       ).state('register.step2',
         url: '/step2'
         templateUrl: '/fe_/register/step2'
-        controller: 'registerStep2Cntl'
+        controller: 'registerStep2Cntl as cntl'
+        resolve:
+          foundUsers: ['registerData', '$http', '$q'
+            (data, $http, $q) ->
+              d = $q.defer()
+              $http.post('/api_/search', data.search)
+                .success (data) -> d.resolve data
+              d.promise
+          ]
       ).state('register.step3',
         url: '/step3'
         templateUrl: '/fe_/register/step3'
-        controller: 'registerStep3Cntl'
+        controller: 'registerStep3Cntl as cntl'
       )
 ]
