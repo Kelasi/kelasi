@@ -13,7 +13,7 @@ guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAIL
   watch(%r{features/support/}) { :cucumber }
 end
 
-guard :rspec, cli: '--drb' do
+guard :rspec, cmd: 'rspec --drb' do
   watch(%r{^spec/.+_spec\.rb$})
   watch(%r{^lib/(.+)\.rb$})     { |m| "spec/lib/#{m[1]}_spec.rb" }
   watch('spec/spec_helper.rb')  { "spec" }
@@ -42,4 +42,12 @@ guard 'livereload' do
   watch(%r{config/locales/.+\.yml})
   # Rails Assets Pipeline
   watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html))).*}) { |m| "/assets/#{m[3]}" }
+end
+
+guard :teaspoon do
+  # Implementation files
+  watch(%r{app/assets/javascripts/(.+).js}) { |m| "#{m[1]}_spec" }
+
+  # Specs / Helpers
+  watch(%r{spec/javascripts/(.*)})
 end
