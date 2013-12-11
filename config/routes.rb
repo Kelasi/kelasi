@@ -1,7 +1,17 @@
 Kelasi::Application.routes.draw do
-  resources :universities
 
-  devise_for :users
+  scope 'api_', module: :backend, defaults: {format: 'json'} do
+    resources :users
+    resource :session, only: [:show, :create, :destroy], controller: 'session'
+    post 'search', to: 'search#search'
+  end
+
+  scope '/fe_', module: :frontend do
+    get '/(*page)', to: 'pages#page'
+  end
+
+  root to: 'frontend/pages#page'
+  get '/*path', to: 'frontend/pages#page'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,21 @@
+%p Finish your registeration
+%form
+  %p
+    First Name
+    %input(ng-model='cntl.data.user.first_name')
+  %p
+    Last Name
+    %input(ng-model='cntl.data.user.last_name')
+  %p
+    University
+    %input(ng-model='cntl.data.user.university')
+  %p
+    Email
+    %input(ng-model='cntl.data.user.email' type='email')
+  %p
+    Password
+    %input(ng-model='cntl.data.user.password' type='password')
+
+%a(ui-sref='register.step2') Previous
+%a(ui-sref='home' ng-click='cntl.save()') Save
+
