@@ -26,10 +26,11 @@ group :development, :test do
 	gem 'sqlite3'
   gem 'rspec-rails', '~> 2.0'
   gem 'spork-rails'
-  gem 'jazz_hands'
   gem 'factory_girl_rails'
   gem 'teaspoon'
 end
+
+gem 'jazz_hands', group: :debug
 
 group :test do
   gem 'webmock'
