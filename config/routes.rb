@@ -4,6 +4,7 @@ Kelasi::Application.routes.draw do
     resources :users
     resource :session, only: [:show, :create, :destroy], controller: 'session'
     post 'search', to: 'search#search'
+    get '/profile/:profile_name', to: 'profiles#show'
   end
 
   scope '/fe_', module: :frontend do

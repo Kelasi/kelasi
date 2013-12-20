@@ -29,6 +29,12 @@ describe User do
       subject.introducer = nil
       expect(subject).to be_invalid
     end
+
+    it "should have a unique profile_name" do
+      subject.profile_name = user.profile_name
+      subject.save
+      expect(subject).to be_invalid
+    end
   end
 
   context 'relations' do
@@ -54,6 +60,47 @@ describe User do
     it "should have an introducer", :vcr do
       expect(introduced_user.respond_to? :introducer).to be_true
       expect(introduced_user.introducer).to eq user
+    end
+  end
+
+  context 'profile name' do
+    subject { FactoryGirl.build :user }
+    let (:profile_name) { user.first_name.downcase + user.last_name.capitalize }
+
+    it "should create a profile_name if user left it blank" do
+      subject.profile_name = ''
+      subject.save
+      expect(subject.profile_name).to be_present
+    end
+
+    it "should create a profile_name with a specific algorithm" do
+      subject.profile_name = ''
+      subject.save
+      expect(subject.profile_name).to eq profile_name
+    end
+
+    it "should create a random profile_name if the user's name already exists" do
+      u = FactoryGirl.create :user, profile_name: ''
+      subject.first_name = u.first_name
+      subject.last_name = u.last_name
+      subject.profile_name = ''
+      subject.save
+      regex = Regexp.new(profile_name+'\d+')
+      expect(subject.profile_name).to match regex
+    end
+
+    it "should create a profile_name based on email in the case of invalid first or last name" do
+      subject.first_name = "جان"
+      subject.save
+      expect(subject.profile_name).to eq subject.email.split('@').first
+    end
+
+    it "should create a random profile_name if the local part of the user's email already exist" do
+      u = FactoryGirl.create :user, profile_name: subject.email.split('@').first
+      subject.first_name = 'جان'
+      subject.save
+      regex = Regexp.new(subject.email.split('@').first+'\d+')
+      expect(subject.profile_name).to match regex
     end
   end
 
