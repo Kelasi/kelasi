@@ -26,12 +26,22 @@ controllers.controller 'registerStep3Cntl',
   ]
 
 controllers.controller 'adminUsersCntl',
-  ['$scope', '$http',
-  ($scope, $http) ->
-    $http.get('/api_/users').success (data) ->
-      $scope.users = data
-    $scope.delete_ = (user) ->
-      $http.delete("/api_/users/#{user.id}").success (user) ->
-        idx = $scope.users.indexOf user
-        $scope.users.splice idx, 1
+  ['$http', '$state'
+  ($http, $state) ->
+    $http.get('/api_/users').success (data) =>
+      @users = data
+    @delete_ = (user) =>
+      $http.delete("/api_/users/#{user.id}").success (user) =>
+        idx = @users.indexOf user
+        @users.splice idx, 1
+    @profile = (user) ->
+      $state.go 'profile', profile_name: user.profile_name
+    @w = 1
+  ]
+
+controllers.controller 'profileCntl',
+  ['profileData',
+  (profileData) ->
+    @profileData = profileData
+    @w = 1
   ]

@@ -22,7 +22,7 @@ kelasi.config ['$stateProvider', '$urlRouterProvider', '$locationProvider',
       ).state('admin.users',
         url: '/users'
         templateUrl: '/fe_/admin/users'
-        controller: 'adminUsersCntl'
+        controller: 'adminUsersCntl as cntl'
       ).state('register',
         abstract: true
         url: '/register'
@@ -38,16 +38,30 @@ kelasi.config ['$stateProvider', '$urlRouterProvider', '$locationProvider',
         templateUrl: '/fe_/register/step2'
         controller: 'registerStep2Cntl as cntl'
         resolve:
-          foundUsers: ['registerData', '$http', '$q'
+          foundUsers:
+            ['registerData', '$http', '$q'
             (data, $http, $q) ->
               d = $q.defer()
               $http.post('/api_/search', data.search)
                 .success (data) -> d.resolve data
               d.promise
-          ]
+            ]
       ).state('register.step3',
         url: '/step3'
         templateUrl: '/fe_/register/step3'
         controller: 'registerStep3Cntl as cntl'
+      ).state('profile',
+        url: '/profile/:profile_name'
+        templateUrl: '/fe_/profile'
+        controller: 'profileCntl as cntl'
+        resolve:
+          profileData:
+            ['$http', '$q', '$stateParams'
+            ($http, $q, $stateParams) ->
+              deffered = $q.defer()
+              $http.get("/api_/profile/#{$stateParams.profile_name}")
+                .success (data) -> deffered.resolve data
+              deffered.promise
+            ]
       )
 ]

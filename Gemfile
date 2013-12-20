@@ -16,6 +16,7 @@ group :development do
   gem 'guard-livereload'
   gem 'guard-teaspoon'
   gem 'coffee-rails-source-maps'
+  gem 'sprockets_better_errors'
 end
 
 group :production do
@@ -30,7 +31,10 @@ group :development, :test do
   gem 'teaspoon'
 end
 
-gem 'jazz_hands', group: :debug
+group :debug do
+  gem 'jazz_hands'
+  gem 'pry-plus'
+end
 
 group :test do
   gem 'webmock'
@@ -72,8 +76,8 @@ end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-# Use unicorn as the app server
-gem 'unicorn'
+# Use 'Phusion Passenger' as the app server
+gem 'passenger'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
