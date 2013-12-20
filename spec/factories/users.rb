@@ -10,7 +10,8 @@ FactoryGirl.define do
     salt                  "asdasdastr4325234324sdfds"
     crypted_password      { Sorcery::CryptoProviders::BCrypt.encrypt("secret", salt) }
     email
-    introducer            { u = FactoryGirl.build :user, introducer: nil; u.save validate: false; u }
+    introducer            { u = FactoryGirl.build :user, introducer: nil, profile_name: 'bidbid';
+                            u.save validate: false; u }
 
     factory :user_with_university do
       after(:create) do |user|

@@ -1,4 +1,5 @@
 require 'uni_normalize'
+require 'securerandom'
 
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
@@ -13,6 +14,9 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
   validates :password, length: { minimum: 6 }
   validates :introducer, presence: true
+  validates :profile_name, uniqueness: true
+
+  before_create :set_profile_name
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
@@ -52,5 +56,16 @@ class User < ActiveRecord::Base
 
   def currently_attending
     self.atendances.where(currently_attending: true).includes(:university).map(&:university)
+  end
+
+  def set_profile_name
+
+    return unless self.profile_name.blank?
+
+    profile_name  = ( self.first_name.downcase + self.last_name.capitalize ).delete ' '
+    profile_name  = self.email.split('@').first unless /^\w+$/ =~ profile_name
+    profile_name += Random.rand(9).to_s while User.find_by(profile_name: profile_name)
+
+    self.profile_name = profile_name
   end
 end

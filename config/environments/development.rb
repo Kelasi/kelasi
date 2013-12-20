@@ -26,6 +26,7 @@ Kelasi::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+  config.assets.raise_production_errors = true
 
   # Turn on source maps
   config.sass.debug_info = true

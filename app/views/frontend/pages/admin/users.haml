@@ -2,9 +2,10 @@
   %h1 User Management
 %p Users list:
 %ul
-  %li(ng-repeat="user in users")
+  %li(ng-repeat="user in cntl.users")
     {{user}}
-    %a(href='' ng-click='delete_(user)') delete
-    %a(href='' ng-click='edit(user)') edit
+    %a(href='' ng-click='cntl.delete_(user)') delete
+    %a(href='' ng-click='cntl.edit(user)') edit
+    %a(href='' ng-click='cntl.profile(user)') profile
   %li
-    %a(href='' ng-click='newUser()') New user
+    %a(href='' ng-click='cntl.newUser()') New user
