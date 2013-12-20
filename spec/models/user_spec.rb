@@ -31,6 +31,7 @@ describe User do
     end
 
     it "should have a unique profile_name" do
+      subject.profile_name = user.profile_name
       subject.save
       expect(subject).to be_invalid
     end
@@ -63,8 +64,8 @@ describe User do
   end
 
   context 'profile name' do
-    subject { FactoryGirl.build :user}
-    let (:profile_name) { user.first_name.downcase+user.last_name.capitalize }
+    subject { FactoryGirl.build :user }
+    let (:profile_name) { user.first_name.downcase + user.last_name.capitalize }
 
     it "should create a profile_name if user left it blank" do
       subject.profile_name = ''
@@ -79,10 +80,12 @@ describe User do
     end
 
     it "should create a random profile_name if the user's name already exists" do
-      FactoryGirl.create :user, profile_name: ''
+      u = FactoryGirl.create :user, profile_name: ''
+      subject.first_name = u.first_name
+      subject.last_name = u.last_name
       subject.profile_name = ''
       subject.save
-      regex = Regexp.new(profile_name+'.{5,6}')
+      regex = Regexp.new(profile_name+'\d+')
       expect(subject.profile_name).to match regex
     end
 
@@ -93,11 +96,10 @@ describe User do
     end
 
     it "should create a random profile_name if the local part of the user's email already exist" do
-      u = FactoryGirl.create :user, first_name: 'جان'
+      u = FactoryGirl.create :user, profile_name: subject.email.split('@').first
       subject.first_name = 'جان'
-      subject.email = u.email+'a'
       subject.save
-      regex = Regexp.new(subject.email.split('@').first+'.{5,6}')
+      regex = Regexp.new(subject.email.split('@').first+'\d+')
       expect(subject.profile_name).to match regex
     end
   end

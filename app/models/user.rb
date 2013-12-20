@@ -62,16 +62,10 @@ class User < ActiveRecord::Base
 
     return unless self.profile_name.blank?
 
-    regex = /[\w\s]+/
+    profile_name  = ( self.first_name.downcase + self.last_name.capitalize ).delete ' '
+    profile_name  = self.email.split('@').first unless /^\w+$/ =~ profile_name
+    profile_name += Random.rand(9).to_s while User.find_by(profile_name: profile_name)
 
-    if regex === self.first_name && regex === self.last_name
-      profile_name = self.first_name.downcase.delete(' ')+self.last_name.capitalize.delete(' ')
-      self.profile_name = (User.find_by(profile_name: profile_name).blank?) ?
-                           profile_name : profile_name + SecureRandom.urlsafe_base64(4)
-    else
-      profile_name = self.email.split('@').first
-      self.profile_name = (User.find_by(profile_name: profile_name).blank?) ?
-                           profile_name : profile_name + SecureRandom.urlsafe_base64(4)
-    end
+    self.profile_name = profile_name
   end
 end
