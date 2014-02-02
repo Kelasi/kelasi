@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :introduced_users, class_name: 'User'
   belongs_to :introducer, class_name: 'User', foreign_key: 'user_id'
 
+  has_many :timeline_user_permissions
+  has_many :timelines, through: :timeline_user_permissions
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, uniqueness: true
@@ -16,7 +19,7 @@ class User < ActiveRecord::Base
   validates :introducer, presence: true
   validates :profile_name, uniqueness: true
 
-  before_create :set_profile_name
+  before_create :configure_profile_name
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
@@ -58,7 +61,7 @@ class User < ActiveRecord::Base
     self.atendances.where(currently_attending: true).includes(:university).map(&:university)
   end
 
-  def set_profile_name
+  def configure_profile_name
 
     return unless self.profile_name.blank?
 

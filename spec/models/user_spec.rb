@@ -30,8 +30,8 @@ describe User do
       expect(subject).to be_invalid
     end
 
-    it "should have a unique profile_name" do
-      subject.profile_name = user.profile_name
+    it "should have a unique profile_name", :vcr do
+      subject.profile_name = ''
       subject.save
       expect(subject).to be_invalid
     end
@@ -60,6 +60,15 @@ describe User do
     it "should have an introducer", :vcr do
       expect(introduced_user.respond_to? :introducer).to be_true
       expect(introduced_user.introducer).to eq user
+    end
+
+    context 'timeline' do
+
+      subject { FactoryGirl.create :user_with_timeline }
+
+      it "should respond to timeline" do
+        expect(subject).to respond_to :timelines
+      end
     end
   end
 
