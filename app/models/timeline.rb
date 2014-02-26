@@ -3,6 +3,7 @@ require 'required_param'
 class Timeline < ActiveRecord::Base
   has_many :timeline_user_permissions
   has_many :users, through: :timeline_user_permissions
+  has_many :timeline_posts
 
   validates :title, presence: true
 
