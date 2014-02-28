@@ -2,7 +2,8 @@ Kelasi::Application.routes.draw do
 
   scope 'api_', module: :backend, defaults: {format: 'json'} do
     resources :users
-    resources :timelines, except: [:new, :edit]
+    resources :timelines, only: [:index, :show, :create, :update, :destroy]
+    resources :timeline_posts, only: [:show, :create, :update, :destroy]
     resource :session, only: [:show, :create, :destroy], controller: 'session'
     post 'search', to: 'search#search'
     get '/profile/:profile_name', to: 'profiles#show'
