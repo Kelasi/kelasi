@@ -2,6 +2,33 @@ require 'spec_helper'
 
 describe Backend::PostsController do
 
+  describe "'GET' index" do
+
+    let(:tp) { FactoryGirl.create :timeline_post }
+
+    it "returns http success", :vcr do
+      get 'index', timeline_id: tp.timeline_id
+      expect(response).to be_success
+    end
+
+    it "should returns the posts of the timeline", :vcr do
+      get 'index', timeline_id: tp.timeline_id
+      expect(assigns(:timeline_posts)).to eq [tp]
+    end
+
+    it "should not return deactive posts", :vcr do
+      deactive_post = FactoryGirl.create :timeline_post, state: TimelinePost::States::DEACTIVE
+      get 'index', timeline_id: deactive_post.timeline_id
+      expect(assigns(:timeline_posts)).to eq []
+    end
+
+    it "should not return others timeline posts", :vcr do
+      other_timeline_post = FactoryGirl.create :timeline_post, timeline: FactoryGirl.create(:timeline)
+      get 'index', timeline_id: tp.timeline_id
+      expect(assigns(:timeline_posts)).to eq [tp]
+    end
+  end
+
   describe "'GET' show" do
     it "returns http success and returns the post", :vcr do
       tp = FactoryGirl.create :timeline_post
