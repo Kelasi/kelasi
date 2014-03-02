@@ -26,7 +26,7 @@ http_interactions:
       - '79'
     body:
       encoding: UTF-8
-      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"2","_version":33}'
+      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"2","_version":10}'
     http_version: 
-  recorded_at: Sun, 02 Mar 2014 10:06:41 GMT
+  recorded_at: Sun, 02 Mar 2014 14:40:26 GMT
 recorded_with: VCR 2.8.0

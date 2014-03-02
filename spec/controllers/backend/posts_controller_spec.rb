@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Backend::TimelinePostsController do
+describe Backend::PostsController do
 
   describe "'GET' show" do
     it "returns http success and returns the post", :vcr do

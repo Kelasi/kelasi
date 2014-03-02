@@ -23,12 +23,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '79'
+      - '78'
     body:
       encoding: UTF-8
-      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"2","_version":28}'
+      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"2","_version":7}'
     http_version: 
-  recorded_at: Sun, 02 Mar 2014 10:04:13 GMT
+  recorded_at: Sun, 02 Mar 2014 14:40:24 GMT
 - request:
     method: post
     uri: http://localhost:9200/kelasi_test_users/user/3
@@ -52,10 +52,10 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '79'
+      - '78'
     body:
       encoding: UTF-8
-      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"3","_version":12}'
+      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"3","_version":2}'
     http_version: 
-  recorded_at: Sun, 02 Mar 2014 10:04:14 GMT
+  recorded_at: Sun, 02 Mar 2014 14:40:25 GMT
 recorded_with: VCR 2.8.0
