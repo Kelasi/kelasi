@@ -71,4 +71,8 @@ class User < ActiveRecord::Base
 
     self.profile_name = profile_name
   end
+
+  def admin?(timeline)
+    timeline.admin? self
+  end
 end

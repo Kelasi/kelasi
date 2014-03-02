@@ -30,8 +30,6 @@ class Backend::TimelinePostsController < Backend::BackendController
 
     def current_user_post
       @tp = TimelinePost.find_by params.permit(:id)
-      head :unauthorized unless @tp.user == current_user or
-                                current_user.timeline_user_permissions.where(role: TimelineUserPermission::Roles::ADMIN
-                                                                            ).any? {|x| x.timeline == @tp.timeline}
+      head :unauthorized unless @tp.user == current_user or @tp.timeline.admin? current_user
     end
 end

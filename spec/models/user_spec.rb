@@ -62,13 +62,24 @@ describe User do
       expect(introduced_user.introducer).to eq user
     end
 
-    context 'timeline' do
+    it "should respond to timeline", :vcr do
+      uwt = FactoryGirl.create :user_with_timeline
+      expect(subject).to respond_to :timelines
+    end
+  end
 
-      subject { FactoryGirl.create :user_with_timeline }
+  context 'timeline' do
 
-      it "should respond to timeline", :vcr do
-        expect(subject).to respond_to :timelines
-      end
+    let(:user) { FactoryGirl.create :user_with_timeline }
+    let(:timeline) { user.timelines.first }
+
+    it "should return true if the user is the admin of the timeline", :vcr do
+      expect(user.admin? timeline).to be_true
+    end
+
+    it "should return false if the user is not the admin", :vcr do
+      random_user = FactoryGirl.create :user
+      expect(random_user.admin? timeline).to be_false
     end
   end
 

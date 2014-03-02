@@ -13,4 +13,9 @@ class Timeline < ActiveRecord::Base
     timeline.timeline_user_permissions.create user: admin, role: TimelineUserPermission::Roles::ADMIN
     timeline
   end
+
+  def admin?(user)
+    return true if self.timeline_user_permissions.where(role: TimelineUserPermission::Roles::ADMIN
+                                                       ).map(&:user).include? user
+  end
 end
