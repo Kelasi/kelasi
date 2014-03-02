@@ -5,19 +5,19 @@ describe TimelinePost do
   subject { FactoryGirl.build :timeline_post }
 
   context 'state' do
-    it "should have state" do
+    it "should have state", :vcr do
       subject.state = nil
       expect(subject).to be_invalid
     end
 
-    it "should accept valid values" do
+    it "should accept valid values", :vcr do
       TimelinePost::States::AllStates.each do |state|
         subject.state = state
         expect(subject).to be_valid
       end
     end
 
-    it "should reject invalid values" do
+    it "should reject invalid values", :vcr do
       invalid_states = [TimelinePost::States::AllStates.first - 1,
                         TimelinePost::States::AllStates.last  + 1]
       invalid_states.each do |state|
@@ -28,7 +28,7 @@ describe TimelinePost do
   end
 
   context 'post body' do
-    it "should unable to save post with empty body" do
+    it "should unable to save post with empty body", :vcr do
       subject.body = ''
       expect(subject).to be_invalid
     end

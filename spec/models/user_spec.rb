@@ -66,7 +66,7 @@ describe User do
 
       subject { FactoryGirl.create :user_with_timeline }
 
-      it "should respond to timeline" do
+      it "should respond to timeline", :vcr do
         expect(subject).to respond_to :timelines
       end
     end
@@ -76,19 +76,19 @@ describe User do
     subject { FactoryGirl.build :user }
     let (:profile_name) { user.first_name.downcase + user.last_name.capitalize }
 
-    it "should create a profile_name if user left it blank" do
+    it "should create a profile_name if user left it blank", :vcr do
       subject.profile_name = ''
       subject.save
       expect(subject.profile_name).to be_present
     end
 
-    it "should create a profile_name with a specific algorithm" do
+    it "should create a profile_name with a specific algorithm", :vcr do
       subject.profile_name = ''
       subject.save
       expect(subject.profile_name).to eq profile_name
     end
 
-    it "should create a random profile_name if the user's name already exists" do
+    it "should create a random profile_name if the user's name already exists", :vcr do
       u = FactoryGirl.create :user, profile_name: ''
       subject.first_name = u.first_name
       subject.last_name = u.last_name
@@ -98,13 +98,13 @@ describe User do
       expect(subject.profile_name).to match regex
     end
 
-    it "should create a profile_name based on email in the case of invalid first or last name" do
+    it "should create a profile_name based on email in the case of invalid first or last name", :vcr do
       subject.first_name = "جان"
       subject.save
       expect(subject.profile_name).to eq subject.email.split('@').first
     end
 
-    it "should create a random profile_name if the local part of the user's email already exist" do
+    it "should create a random profile_name if the local part of the user's email already exist", :vcr do
       u = FactoryGirl.create :user, profile_name: subject.email.split('@').first
       subject.first_name = 'جان'
       subject.save

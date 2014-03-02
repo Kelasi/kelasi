@@ -24,7 +24,7 @@ describe Backend::UsersController do
   end
 
   describe "POST 'create'" do
-    it "should create a new user with right params" do
+    it "should create a new user with right params", :vcr do
       u = FactoryGirl.create :user_with_university
       params = {
         first_name: 'first',

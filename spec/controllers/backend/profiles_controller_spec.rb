@@ -5,12 +5,12 @@ describe Backend::ProfilesController do
 
 	describe "GET 'show'" do
 
-	    it "returns http success" do
+	    it "returns http success", :vcr do
 	      get 'show', profile_name: subject.profile_name
 	      expect(response).to be_success
 	    end
 
-	    it "should returns user's informations" do
+	    it "should returns user's informations", :vcr do
 	    	get 'show', profile_name: subject.profile_name
 	    	expect(assigns(:user)).to eq subject
 	    end

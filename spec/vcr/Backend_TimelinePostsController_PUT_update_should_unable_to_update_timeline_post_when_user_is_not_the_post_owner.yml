@@ -1,0 +1,61 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:9200/kelasi_test_users/user/2
+    body:
+      encoding: UTF-8
+      string: '{"id":2,"first_name":"John","last_name":"Doe","universities":[],"current_universities":[]}'
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '90'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '79'
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"2","_version":28}'
+    http_version: 
+  recorded_at: Sun, 02 Mar 2014 10:04:13 GMT
+- request:
+    method: post
+    uri: http://localhost:9200/kelasi_test_users/user/3
+    body:
+      encoding: UTF-8
+      string: '{"id":3,"first_name":"John","last_name":"Doe","universities":[],"current_universities":[]}'
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '90'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '79'
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"3","_version":12}'
+    http_version: 
+  recorded_at: Sun, 02 Mar 2014 10:04:14 GMT
+recorded_with: VCR 2.8.0
