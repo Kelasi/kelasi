@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131216150111) do
+ActiveRecord::Schema.define(version: 20140225164822) do
 
   create_table "atendances", force: true do |t|
     t.integer  "user_id"
@@ -21,6 +21,38 @@ ActiveRecord::Schema.define(version: 20131216150111) do
     t.date     "from"
     t.date     "to"
     t.boolean  "currently_attending", default: false, null: false
+  end
+
+  create_table "timeline_posts", force: true do |t|
+    t.integer  "timeline_id"
+    t.integer  "user_id"
+    t.integer  "parent_id"
+    t.integer  "state",       default: 1
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "timeline_posts", ["parent_id"], name: "index_timeline_posts_on_parent_id"
+  add_index "timeline_posts", ["state"], name: "index_timeline_posts_on_state"
+  add_index "timeline_posts", ["timeline_id"], name: "index_timeline_posts_on_timeline_id"
+
+  create_table "timeline_user_permissions", force: true do |t|
+    t.integer  "timeline_id"
+    t.integer  "user_id"
+    t.integer  "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "timeline_user_permissions", ["role"], name: "index_timeline_user_permissions_on_role"
+  add_index "timeline_user_permissions", ["timeline_id"], name: "index_timeline_user_permissions_on_timeline_id"
+  add_index "timeline_user_permissions", ["user_id"], name: "index_timeline_user_permissions_on_user_id"
+
+  create_table "timelines", force: true do |t|
+    t.string   "title",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "universities", force: true do |t|
@@ -42,6 +74,6 @@ ActiveRecord::Schema.define(version: 20131216150111) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["profile_name"], name: "index_users_on_profile_name"
+  add_index "users", ["profile_name"], name: "index_users_on_profile_name", unique: true
 
 end

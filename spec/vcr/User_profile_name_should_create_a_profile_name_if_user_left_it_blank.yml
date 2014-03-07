@@ -1,0 +1,34 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:9200/kelasi_test_users/user/2
+    body:
+      encoding: UTF-8
+      string: '{"id":2,"first_name":"John","last_name":"Doe","universities":[],"current_universities":[]}'
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '90'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 500
+      message: Internal Server Error
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '229'
+    body:
+      encoding: UTF-8
+      string: '{"error":"IndexFailedEngineException[[kelasi_test_users][3] Index failed
+        for [user#2]]; nested: IOException[Cannot create directory: /var/lib/elasticsearch/elasticsearch/nodes/0/indices/kelasi_test_users/3/index];
+        ","status":500}'
+    http_version: 
+  recorded_at: Sat, 01 Mar 2014 16:08:42 GMT
+recorded_with: VCR 2.8.0

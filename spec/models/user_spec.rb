@@ -30,8 +30,8 @@ describe User do
       expect(subject).to be_invalid
     end
 
-    it "should have a unique profile_name" do
-      subject.profile_name = user.profile_name
+    it "should have a unique profile_name", :vcr do
+      subject.profile_name = ''
       subject.save
       expect(subject).to be_invalid
     end
@@ -61,25 +61,45 @@ describe User do
       expect(introduced_user.respond_to? :introducer).to be_true
       expect(introduced_user.introducer).to eq user
     end
+
+    it "should respond to timeline", :vcr do
+      uwt = FactoryGirl.create :user_with_timeline
+      expect(subject).to respond_to :timelines
+    end
+  end
+
+  context 'timeline' do
+
+    let(:user) { FactoryGirl.create :user_with_timeline }
+    let(:timeline) { user.timelines.first }
+
+    it "should return true if the user is the admin of the timeline", :vcr do
+      expect(user.admin? timeline).to be_true
+    end
+
+    it "should return false if the user is not the admin", :vcr do
+      random_user = FactoryGirl.create :user
+      expect(random_user.admin? timeline).to be_false
+    end
   end
 
   context 'profile name' do
     subject { FactoryGirl.build :user }
     let (:profile_name) { user.first_name.downcase + user.last_name.capitalize }
 
-    it "should create a profile_name if user left it blank" do
+    it "should create a profile_name if user left it blank", :vcr do
       subject.profile_name = ''
       subject.save
       expect(subject.profile_name).to be_present
     end
 
-    it "should create a profile_name with a specific algorithm" do
+    it "should create a profile_name with a specific algorithm", :vcr do
       subject.profile_name = ''
       subject.save
       expect(subject.profile_name).to eq profile_name
     end
 
-    it "should create a random profile_name if the user's name already exists" do
+    it "should create a random profile_name if the user's name already exists", :vcr do
       u = FactoryGirl.create :user, profile_name: ''
       subject.first_name = u.first_name
       subject.last_name = u.last_name
@@ -89,13 +109,13 @@ describe User do
       expect(subject.profile_name).to match regex
     end
 
-    it "should create a profile_name based on email in the case of invalid first or last name" do
+    it "should create a profile_name based on email in the case of invalid first or last name", :vcr do
       subject.first_name = "جان"
       subject.save
       expect(subject.profile_name).to eq subject.email.split('@').first
     end
 
-    it "should create a random profile_name if the local part of the user's email already exist" do
+    it "should create a random profile_name if the local part of the user's email already exist", :vcr do
       u = FactoryGirl.create :user, profile_name: subject.email.split('@').first
       subject.first_name = 'جان'
       subject.save
