@@ -52,6 +52,11 @@ describe Timeline do
     it "should return the constructed TimelineUserPermission", :vcr do
       expect(subject.add_member user).to be_a TimelineUserPermission
     end
+
+    it "should return the already existing membership", :vcr do
+      membership = subject.add_member user
+      expect(subject.add_member user).to eq membership
+    end
   end
 
   context :role? do

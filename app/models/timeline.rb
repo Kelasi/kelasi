@@ -22,7 +22,8 @@ class Timeline < ActiveRecord::Base
   def add_member(user, options={})
     role = options[:role] || TimelineUserPermission::Roles::PARTICIPANTS
     raise "expecting an instance of User" unless user.instance_of? User
-    self.timeline_user_permissions.create! user: user, role: role
+    timeline_user_permissions.find_by(user: user) or
+      timeline_user_permissions.create!(user: user, role: role)
   end
 
   def role?(user)

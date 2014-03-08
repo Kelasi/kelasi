@@ -154,18 +154,20 @@ describe Backend::MembersController do
 
     context "logged in" do
 
-      before { login_user membership.user }
+      let(:user)     { FactoryGirl.create :user }
+      let(:timeline) { FactoryGirl.create :timeline }
+      before { login_user user }
 
       it "should create the membership and return it", :vcr do
         expect{
-          post 'create', timeline_id: membership.timeline.id
+          post 'create', timeline_id: timeline.id
         }.to change(TimelineUserPermission, :count).by(1)
         expect(response).to be_success
         expect(assigns :membership).to be_a TimelineUserPermission
       end
     end
 
-    context " not logged in" do
+    context "not logged in" do
 
       before { logout_user }
 
