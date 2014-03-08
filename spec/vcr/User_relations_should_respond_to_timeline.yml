@@ -17,20 +17,18 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 500
-      message: Internal Server Error
+      code: 200
+      message: OK
     headers:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '229'
+      - '85'
     body:
       encoding: UTF-8
-      string: '{"error":"IndexFailedEngineException[[kelasi_test_users][3] Index failed
-        for [user#2]]; nested: IOException[Cannot create directory: /var/lib/elasticsearch/elasticsearch/nodes/0/indices/kelasi_test_users/3/index];
-        ","status":500}'
+      string: '{"_index":"kelasi_test_users","_type":"user","_id":"2","_version":46,"created":false}'
     http_version: 
-  recorded_at: Sun, 02 Mar 2014 12:41:44 GMT
+  recorded_at: Sat, 08 Mar 2014 14:56:57 GMT
 - request:
     method: post
     uri: http://localhost:9200/kelasi_test_users/user/3
@@ -48,20 +46,18 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 500
-      message: Internal Server Error
+      code: 200
+      message: OK
     headers:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '229'
+      - '84'
     body:
       encoding: UTF-8
-      string: '{"error":"IndexFailedEngineException[[kelasi_test_users][4] Index failed
-        for [user#3]]; nested: IOException[Cannot create directory: /var/lib/elasticsearch/elasticsearch/nodes/0/indices/kelasi_test_users/4/index];
-        ","status":500}'
+      string: '{"_index":"kelasi_test_users","_type":"user","_id":"3","_version":6,"created":false}'
     http_version: 
-  recorded_at: Sun, 02 Mar 2014 12:41:44 GMT
+  recorded_at: Sat, 08 Mar 2014 14:56:57 GMT
 - request:
     method: post
     uri: http://localhost:9200/kelasi_test_users/user/3
@@ -79,18 +75,16 @@ http_interactions:
       - Ruby
   response:
     status:
-      code: 500
-      message: Internal Server Error
+      code: 200
+      message: OK
     headers:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '229'
+      - '84'
     body:
       encoding: UTF-8
-      string: '{"error":"IndexFailedEngineException[[kelasi_test_users][4] Index failed
-        for [user#3]]; nested: IOException[Cannot create directory: /var/lib/elasticsearch/elasticsearch/nodes/0/indices/kelasi_test_users/4/index];
-        ","status":500}'
+      string: '{"_index":"kelasi_test_users","_type":"user","_id":"3","_version":7,"created":false}'
     http_version: 
-  recorded_at: Sun, 02 Mar 2014 12:41:44 GMT
+  recorded_at: Sat, 08 Mar 2014 14:56:57 GMT
 recorded_with: VCR 2.8.0

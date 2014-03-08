@@ -197,12 +197,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '60'
+      - '50'
     body:
       encoding: UTF-8
-      string: '{"ok":true,"_shards":{"total":10,"successful":5,"failed":0}}'
+      string: '{"_shards":{"total":10,"successful":5,"failed":0}}'
     http_version: 
-  recorded_at: Fri, 07 Feb 2014 18:24:01 GMT
+  recorded_at: Sat, 08 Mar 2014 14:56:46 GMT
 - request:
     method: post
     uri: http://localhost:9200/kelasi_test_users/user/2
@@ -226,12 +226,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '78'
+      - '84'
     body:
       encoding: UTF-8
-      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"2","_version":3}'
+      string: '{"_index":"kelasi_test_users","_type":"user","_id":"2","_version":7,"created":false}'
     http_version: 
-  recorded_at: Fri, 07 Feb 2014 18:24:02 GMT
+  recorded_at: Sat, 08 Mar 2014 14:56:47 GMT
 - request:
     method: post
     uri: http://localhost:9200/kelasi_test_users/user/2
@@ -255,12 +255,12 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '78'
+      - '84'
     body:
       encoding: UTF-8
-      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"2","_version":4}'
+      string: '{"_index":"kelasi_test_users","_type":"user","_id":"2","_version":8,"created":false}'
     http_version: 
-  recorded_at: Fri, 07 Feb 2014 18:24:02 GMT
+  recorded_at: Sat, 08 Mar 2014 14:56:47 GMT
 - request:
     method: get
     uri: http://localhost:9200/kelasi_test_users/user/_search?size=10
@@ -284,11 +284,11 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '322'
+      - '306'
     body:
       encoding: UTF-8
-      string: '{"took":39,"timed_out":false,"_shards":{"total":5,"successful":5,"failed":0},"hits":{"total":1,"max_score":0.8407993,"hits":[{"_index":"kelasi_test_users","_type":"user","_id":"2","_score":0.8407993,
-        "_source" : {"id":2,"first_name":"John","last_name":"Doe","universities":["someuniversity"],"current_universities":[]}}]}}'
+      string: '{"took":60,"timed_out":false,"_shards":{"total":5,"successful":5,"failed":0},"hits":{"total":1,"max_score":0.4339554,"hits":[{"_index":"kelasi_test_users","_type":"user","_id":"2","_score":0.4339554,
+        "_source" : {"id":2,"first_name":"John","last_name":"Doe","universities":[],"current_universities":[]}}]}}'
     http_version: 
-  recorded_at: Fri, 07 Feb 2014 18:24:02 GMT
+  recorded_at: Sat, 08 Mar 2014 14:56:47 GMT
 recorded_with: VCR 2.8.0
