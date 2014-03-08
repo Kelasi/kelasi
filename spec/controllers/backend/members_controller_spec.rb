@@ -7,24 +7,24 @@ describe Backend::MembersController do
   describe "GET 'index'" do
     let(:timeline) { FactoryGirl.create :timeline_with_some_members }
 
-    it "returns http success" do
+    it "returns http success", :vcr do
       get 'index', timeline_id: timeline.id
       response.should be_success
     end
 
-    it "should return all members" do
+    it "should return all members", :vcr do
       get 'index', timeline_id: timeline.id
       expect(assigns :members).to eq timeline.users
     end
   end
 
   describe "GET 'show'" do
-    it "returns http success" do
+    it "returns http success", :vcr do
       get 'show', id: membership.id
       response.should be_success
     end
 
-    it "should return the correct user" do
+    it "should return the correct user", :vcr do
       get 'show', id: membership.id
       expect(assigns :member).to eq membership.user
     end
@@ -43,7 +43,7 @@ describe Backend::MembersController do
         login_user timeline_admin
       end
 
-      it "should delete the membership from database" do
+      it "should delete the membership from database", :vcr do
         id = membership.id
         expect{
           delete 'destroy', id: id
@@ -59,7 +59,7 @@ describe Backend::MembersController do
         login_user membership.user
       end
 
-      it "should delete the membership from database" do
+      it "should delete the membership from database", :vcr do
         id = membership.id
         expect{
           delete 'destroy', id: id
@@ -72,7 +72,7 @@ describe Backend::MembersController do
 
       before { login_user FactoryGirl.create :user }
 
-      it "should refuse deleting" do
+      it "should refuse deleting", :vcr do
         id = membership.id
         expect{
           delete 'destroy', id: id
@@ -85,7 +85,7 @@ describe Backend::MembersController do
 
       before { logout_user }
 
-      it "should return error and don't delete user" do
+      it "should return error and don't delete user", :vcr do
         id = membership.id
         expect{
           delete 'destroy', id: id
@@ -108,7 +108,7 @@ describe Backend::MembersController do
         login_user admin
       end
 
-      it "should update the membership and return success" do
+      it "should update the membership and return success", :vcr do
         membership.update! role: TimelineUserPermission::Roles::PARTICIPANTS
         put 'update', id: membership.id,
           role: TimelineUserPermission::Roles::ADMIN
@@ -123,7 +123,7 @@ describe Backend::MembersController do
 
       before { login_user membership.user }
 
-      it "should fail and not update" do
+      it "should fail and not update", :vcr do
         membership.update! role: TimelineUserPermission::Roles::PARTICIPANTS
         put 'update', id: membership.id,
           role: TimelineUserPermission::Roles::ADMIN
@@ -138,7 +138,7 @@ describe Backend::MembersController do
 
       before { logout_user }
 
-      it "should fail and not update" do
+      it "should fail and not update", :vcr do
         membership.update! role: TimelineUserPermission::Roles::PARTICIPANTS
         put 'update', id: membership.id,
           role: TimelineUserPermission::Roles::ADMIN
@@ -156,7 +156,7 @@ describe Backend::MembersController do
 
       before { login_user membership.user }
 
-      it "should create the membership and return it" do
+      it "should create the membership and return it", :vcr do
         expect{
           post 'create', timeline_id: membership.timeline.id
         }.to change(TimelineUserPermission, :count).by(1)
@@ -169,7 +169,7 @@ describe Backend::MembersController do
 
       before { logout_user }
 
-      it "should refuse creating membership and fail" do
+      it "should refuse creating membership and fail", :vcr do
         id = membership.timeline.id
         expect{
           post 'create', timeline_id: id

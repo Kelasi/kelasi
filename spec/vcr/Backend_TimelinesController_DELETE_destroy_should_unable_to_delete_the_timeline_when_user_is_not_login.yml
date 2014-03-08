@@ -23,10 +23,10 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '79'
+      - '85'
     body:
       encoding: UTF-8
-      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"2","_version":21}'
+      string: '{"_index":"kelasi_test_users","_type":"user","_id":"2","_version":13,"created":false}'
     http_version: 
-  recorded_at: Sun, 02 Mar 2014 09:57:04 GMT
+  recorded_at: Sat, 08 Mar 2014 14:56:48 GMT
 recorded_with: VCR 2.8.0

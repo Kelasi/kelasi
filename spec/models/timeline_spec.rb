@@ -36,20 +36,20 @@ describe Timeline do
       expect{subject.add_member true}.to raise_error
     end
 
-    it "should add passed in user as a member(PARTICIPANT)" do
+    it "should add passed in user as a member(PARTICIPANT)", :vcr do
       subject.add_member user
       expect(subject.users).to include user
       expect(subject.role? user)
         .to eq TimelineUserPermission::Roles::PARTICIPANTS
     end
 
-    it "should accept a role param" do
+    it "should accept a role param", :vcr do
       AdminRole = TimelineUserPermission::Roles::ADMIN
       subject.add_member user, role: AdminRole
       expect(subject.role? user).to eq AdminRole
     end
 
-    it "should return the constructed TimelineUserPermission" do
+    it "should return the constructed TimelineUserPermission", :vcr do
       expect(subject.add_member user).to be_a TimelineUserPermission
     end
   end
@@ -66,7 +66,7 @@ describe Timeline do
       ).user
     end
 
-    it "should return the correct role" do
+    it "should return the correct role", :vcr do
       expect(subject.role? admin)
         .to eq TimelineUserPermission::Roles::ADMIN
       expect(subject.role? participant)
