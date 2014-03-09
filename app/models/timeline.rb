@@ -7,6 +7,12 @@ class Timeline < ActiveRecord::Base
 
   validates :title, presence: true
 
+  PAGINATION_LIMIT = 20
+  def self.stream(page: required('page number'))
+    self.order('created_at desc').limit(PAGINATION_LIMIT)
+                                 .offset(PAGINATION_LIMIT * (page -1))
+  end
+
   def self.create!(title: required('title'), admin: required('admin'))
     timeline = self.new title: title.to_s
     timeline.save!
