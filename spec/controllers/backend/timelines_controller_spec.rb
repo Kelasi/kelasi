@@ -3,10 +3,11 @@ require 'spec_helper'
 describe Backend::TimelinesController do
 
   describe "'GET' index" do
-    it "returns http success" do
-      timeline = FactoryGirl.create :timeline
-      get 'index'
-      expect(assigns(:timelines)).to eq [timeline]
+    it "should return timelines of the user", :vcr do
+      user = FactoryGirl.create :user
+      timelines = FactoryGirl.create_list :timeline_user_permission, 5, user: user
+      get 'index', user_id: user.id
+      expect(assigns(:timelines)).to eq timelines.map(&:timeline)
       expect(response).to be_success
     end
   end
