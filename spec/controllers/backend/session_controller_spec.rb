@@ -32,17 +32,17 @@ describe Backend::SessionController do
   end
 
   describe "POST 'create'" do
-    it "should return http 403 when incorrect params sent", :vcr do
+    it "should fail with incorrect params", :vcr do
       post 'create'
-      expect(response.status).to be 403
+      expect(response).not_to be_success
     end
 
-    it "should return http 403 when incorrect pasword send", :vcr do
+    it "should fail with incorrect pasword", :vcr do
       post 'create', email: @user.email, password: "#{@user.password}1"
-      expect(response.status).to be 403
+      expect(response).not_to be_success
     end
 
-    it "should return http success when correct params passed", :vcr do
+    it "should success with correct params", :vcr do
       post 'create', email: @user.email, password: @user.password
       expect(response).to be_success
     end

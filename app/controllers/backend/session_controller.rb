@@ -4,9 +4,8 @@ class Backend::SessionController < Backend::BackendController
   end
 
   def create
-    @user = login params[:email], params[:password]
-    render json: {}, status: 403 unless @user
-    render json: {} if @user
+    user = login params[:email], params[:password]
+    head (user.present? ? :ok : :unauthorized)
   end
 
   def destroy
