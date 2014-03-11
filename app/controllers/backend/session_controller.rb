@@ -1,6 +1,10 @@
 class Backend::SessionController < Backend::BackendController
   def show
-    @response = {user: current_user, logged_in: logged_in?}
+    if logged_in?
+      @user = current_user
+    else
+      head :unauthorized
+    end
   end
 
   def create
@@ -10,6 +14,6 @@ class Backend::SessionController < Backend::BackendController
 
   def destroy
     logout
-    render json: {}
+    head :ok
   end
 end
