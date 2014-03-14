@@ -20,11 +20,11 @@ group :development do
 end
 
 group :production do
-	gem 'pg'
+  gem 'pg'
 end
 
 group :development, :test do
-	gem 'sqlite3'
+  gem 'sqlite3'
   gem 'rspec-rails', '~> 2.0'
   gem 'spork-rails'
   gem 'factory_girl_rails'
@@ -89,3 +89,4 @@ gem 'rails_12factor', group: :production
 
 gem 'tire'
 
+gem 'kaminari'
