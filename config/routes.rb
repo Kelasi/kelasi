@@ -13,6 +13,7 @@ Kelasi::Application.routes.draw do
     resource :session, only: [:show, :create, :destroy], controller: 'session'
     post 'search', to: 'search#search'
     get '/profile/:profile_name', to: 'profiles#show'
+    get '/stream', to: 'streams#index'
   end
 
   scope '/fe_', module: :frontend do

@@ -7,6 +7,8 @@ class Timeline < ActiveRecord::Base
 
   validates :title, presence: true
 
+  scope :recent_timelines, -> { order('created_at desc') }
+
   def self.create!(title: required('title'), admin: required('admin'))
     timeline = self.new title: title.to_s
     timeline.save!
