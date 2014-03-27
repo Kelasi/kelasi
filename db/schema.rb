@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225164822) do
+ActiveRecord::Schema.define(version: 20140326134647) do
 
   create_table "atendances", force: true do |t|
     t.integer  "user_id"
@@ -22,6 +22,39 @@ ActiveRecord::Schema.define(version: 20140225164822) do
     t.date     "to"
     t.boolean  "currently_attending", default: false, null: false
   end
+
+  create_table "audios", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "documents", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "images", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "media", force: true do |t|
+    t.integer  "user_id"
+    t.string   "content_type"
+    t.integer  "attachable_id"
+    t.string   "attachable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "media", ["content_type"], name: "index_media_on_content_type"
+  add_index "media", ["user_id"], name: "index_media_on_user_id"
 
   create_table "timeline_posts", force: true do |t|
     t.integer  "timeline_id"
@@ -75,5 +108,12 @@ ActiveRecord::Schema.define(version: 20140225164822) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["profile_name"], name: "index_users_on_profile_name", unique: true
+
+  create_table "videos", force: true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

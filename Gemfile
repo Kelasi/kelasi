@@ -45,3 +45,5 @@ gem 'rails_12factor', group: :production
 gem 'tire'
 
 gem 'kaminari'
+
+gem 'carrierwave'
