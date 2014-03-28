@@ -28,9 +28,5 @@ Kelasi::Application.configure do
   config.assets.debug = true
   config.assets.raise_production_errors = true
 
-  # Turn on source maps
-  config.sass.debug_info = true
-  config.sass.line_comments = false
-
   config.middleware.use Rack::LiveReload
 end
