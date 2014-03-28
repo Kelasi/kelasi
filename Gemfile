@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
-ruby '2.0.0'
+ruby '2.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.1'
+gem 'rails', '4.1.0.rc1'
 
 gem 'sorcery'
 
@@ -10,7 +10,6 @@ gem 'sorcery'
 group :development do
   gem 'guard'
   gem 'ruby_gntp'
-  gem 'guard-spork'
   gem 'guard-rspec'
   gem 'rack-livereload'
   gem 'guard-livereload'
@@ -26,7 +25,6 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '~> 2.0'
-  gem 'spork-rails'
   gem 'factory_girl_rails'
   gem 'teaspoon'
 end
@@ -77,7 +75,7 @@ end
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use 'Phusion Passenger' as the app server
-gem 'passenger'
+gem 'passenger', group: :production
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
