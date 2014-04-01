@@ -31,6 +31,7 @@ end
 group :test do
   gem 'webmock'
   gem 'vcr'
+  gem 'fivemat'
 end
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
