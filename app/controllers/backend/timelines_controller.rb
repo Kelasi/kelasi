@@ -4,7 +4,7 @@ class Backend::TimelinesController < Backend::BackendController
   before_filter :current_user_timeline, only: [:update, :destroy]
 
   def index
-    @timelines = Timeline.all
+    @timelines = User.find(params[:user_id]).timelines
   end
 
   def show

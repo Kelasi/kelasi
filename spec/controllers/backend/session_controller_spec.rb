@@ -2,63 +2,60 @@ require 'spec_helper'
 
 describe Backend::SessionController do
 
-  before do
-    @user = FactoryGirl.create :user
-    @user.password = FactoryGirl.attributes_for(:user)[:password]
-  end
-
   describe "GET 'show'" do
-    it "returns http success", :vcr do
-      get 'show'
-      response.should be_success
+
+    let(:user) { stub_model User }
+
+    context "logged in" do
+
+      before { login_user user }
+
+      it "should set the user and return success" do
+        get 'show'
+        expect(assigns :user).to eq user
+        expect(response).to be_success
+      end
     end
 
-    it "should render the correct template", :vcr do
-      get 'show'
-      expect(response).to render_template "backend/session/show"
-    end
+    context "logged out" do
 
-    it "should set logged_in to false when logged out", :vcr do
-      logout_user
-      get 'show'
-      expect(assigns(:response)[:logged_in]).to be_false
-    end
+      before { logout_user }
 
-    it "should set logged_in to true when logged in", :vcr do
-      login_user
-      get 'show'
-      expect(assigns(:response)[:logged_in]).to be_true
+      it "should not return success" do
+        get 'show'
+        expect(response).not_to be_success
+      end
     end
   end
 
   describe "POST 'create'" do
-    it "should return http 403 when incorrect params sent", :vcr do
+
+    let(:password) { '12345678' }
+    let(:user) { FactoryGirl.create :user, password: password }
+
+    it "should fail with incorrect params" do
       post 'create'
-      expect(response.status).to be 403
+      expect(response).not_to be_success
     end
 
-    it "should return http 403 when incorrect pasword send", :vcr do
-      post 'create', email: @user.email, password: "#{@user.password}1"
-      expect(response.status).to be 403
+    it "should fail with incorrect pasword", :vcr do
+      post 'create', email: user.email, password: "#{password}1"
+      expect(response).not_to be_success
     end
 
-    it "should return http success when correct params passed", :vcr do
-      post 'create', email: @user.email, password: @user.password
+    it "should success with correct params", :vcr do
+      post 'create', email: user.email, password: password
       expect(response).to be_success
     end
   end
 
   describe "DELETE 'destroy'" do
-    it "returns http success", :vcr do
+    it "should logout" do
+      login_user stub_model(User)
       delete 'destroy'
-      response.should be_success
-    end
-
-    it "should logout", :vcr do
-      login_user
-      delete 'destroy'
+      expect(response).to be_success
       get 'show'
-      expect(assigns(:response)[:logged_in]).to be_false
+      expect(response).not_to be_success
     end
   end
 end

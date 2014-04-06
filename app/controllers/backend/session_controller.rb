@@ -1,16 +1,19 @@
 class Backend::SessionController < Backend::BackendController
   def show
-    @response = {user: current_user, logged_in: logged_in?}
+    if logged_in?
+      @user = current_user
+    else
+      head :unauthorized
+    end
   end
 
   def create
-    @user = login params[:email], params[:password]
-    render json: {}, status: 403 unless @user
-    render json: {} if @user
+    user = login params[:email], params[:password]
+    head (user.present? ? :ok : :unauthorized)
   end
 
   def destroy
     logout
-    render json: {}
+    head :ok
   end
 end

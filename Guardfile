@@ -1,17 +1,3 @@
-# A sample Guardfile
-# More info at https://github.com/guard/guard#readme
-
-guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAILS_ENV' => 'test' } do
-  watch('config/application.rb')
-  watch('config/environment.rb')
-  watch('config/environments/test.rb')
-  watch(%r{^config/initializers/.+\.rb$})
-  watch('Gemfile')
-  watch('Gemfile.lock')
-  watch('spec/spec_helper.rb') { :rspec }
-  watch('test/test_helper.rb') { :test_unit }
-  watch(%r{features/support/}) { :cucumber }
-end
 
 guard :rspec, cmd: 'rspec --drb' do
   watch(%r{^spec/.+_spec\.rb$})
@@ -42,12 +28,4 @@ guard 'livereload' do
   watch(%r{config/locales/.+\.yml})
   # Rails Assets Pipeline
   watch(%r{(app|vendor)(/assets/\w+/(.+\.(css|js|html))).*}) { |m| "/assets/#{m[3]}" }
-end
-
-guard :teaspoon do
-  # Implementation files
-  watch(%r{app/assets/javascripts/(.+).js}) { |m| "#{m[1]}_spec" }
-
-  # Specs / Helpers
-  watch(%r{spec/javascripts/(.*)})
 end
