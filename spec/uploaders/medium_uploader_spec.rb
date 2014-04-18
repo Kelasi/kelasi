@@ -66,5 +66,14 @@ describe MediumUploader do
         expect(subject.model.file_name).to eq 'فارسی.doc'
       end
     end
+
+    context 'in the case of invalid files' do
+
+      it 'store the file should raise an error', :vcr do
+        expect{
+          subject.store! File.open(File.join(Rails.root, 'spec/support/files/invalid.file'))
+        }.to raise_error CarrierWave::IntegrityError
+      end
+    end
   end
 end

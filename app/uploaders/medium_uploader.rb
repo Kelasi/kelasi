@@ -1,3 +1,4 @@
+require 'valid_mime_types'
 # encoding: utf-8
 
 class MediumUploader < CarrierWave::Uploader::Base
@@ -43,10 +44,9 @@ class MediumUploader < CarrierWave::Uploader::Base
   # end
 
   # Add a white list of extensions which are allowed to be uploaded.
-  # For images you might use something like this:
-  # def extension_white_list
-  #   %w(jpg jpeg gif png)
-  # end
+  def extension_white_list
+    MIME::valid_extensions
+  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
