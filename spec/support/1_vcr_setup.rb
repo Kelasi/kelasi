@@ -6,7 +6,6 @@ VCR.configure do |c|
 end
 
 RSpec.configure do |c|
-  c.treat_symbols_as_metadata_keys_with_true_values = true
   c.around(:each) do |example|
     vcr = example.metadata[:vcr]
     vcr = {} if vcr.class == TrueClass
