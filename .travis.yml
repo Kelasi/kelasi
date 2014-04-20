@@ -4,5 +4,13 @@ rvm:
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
 
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq openjdk-7-jre-headless
+  - wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.7.deb
+  - sudo dpkg -i elasticsearch-0.90.7.deb
+  - sudo service elasticsearch start
+  - curl -i localhost:9200/_cluster/health?wait_for_status=yellow; while [ $? -eq 7 ]; do sleep 1; curl -i localhost:9200/_cluster/health?wait_for_status=yellow; done
+
 bundler_args: --without production debug
 
