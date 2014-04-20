@@ -24,14 +24,14 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
-  gem 'jazz_hands'
-  gem 'pry-plus'
+  # gem 'jazz_hands'
+  gem 'pry-plus', '~> 1.0'
 end
 
 group :test do
   gem 'webmock'
   gem 'vcr'
-  gem 'fivemat'
+  # gem 'fivemat'
 end
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
