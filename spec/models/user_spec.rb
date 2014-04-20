@@ -25,11 +25,6 @@ describe User do
       expect(subject).to be_invalid
     end
 
-    it "should have an introducer", :vcr do
-      subject.introducer = nil
-      expect(subject).to be_invalid
-    end
-
     it "should have a unique profile_name", :vcr do
       subject.profile_name = ''
       subject.save

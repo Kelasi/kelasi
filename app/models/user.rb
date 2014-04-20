@@ -18,7 +18,6 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :email, uniqueness: true
   validates :password, length: { minimum: 6 }
-  validates :introducer, presence: true
   validates :profile_name, uniqueness: true
 
   before_create :configure_profile_name

@@ -3,6 +3,16 @@ FactoryGirl.define do
     "bid#{n}@bood.bad"
   end
 
+  factory :john_galt, class: User do
+    first_name              "John"
+    last_name               "Galt"
+    profile_name            "JohnGalt"
+    password                "password"
+    salt                    "asdasdastr4325234324sdfds"
+    crypted_password        { Sorcery::CryptoProviders::BCrypt.encrypt("secret", salt) }
+    email                   "johnGalt@universe"
+  end
+
   factory :user, aliases: [:introduced_user] do
     first_name            "John"
     last_name             "Doe"
@@ -10,7 +20,7 @@ FactoryGirl.define do
     salt                  "asdasdastr4325234324sdfds"
     crypted_password      { Sorcery::CryptoProviders::BCrypt.encrypt("secret", salt) }
     email
-    introducer            { User.find_by :profile_name => 'johnGalt' }
+    introducer            { (User.find_by profile_name: "JohnGalt") or (FactoryGirl.create :john_galt) }
 
     factory :user_with_university do
       after(:create) do |user|
