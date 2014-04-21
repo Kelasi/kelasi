@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326134647) do
+ActiveRecord::Schema.define(version: 20140328195216) do
 
   create_table "atendances", force: true do |t|
     t.integer  "user_id"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20140326134647) do
     t.string   "attachable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "medium"
   end
 
   add_index "media", ["content_type"], name: "index_media_on_content_type"
