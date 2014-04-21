@@ -5,4 +5,6 @@ class Medium < ActiveRecord::Base
   mount_uploader :medium, MediumUploader
 
   validates :content_type, presence: true
+  validates :file_name, presence: true
+  validates :file_size, presence: true
 end
