@@ -38,6 +38,12 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include Sorcery::TestHelpers::Rails
+
+  config.after :all do
+    if Rails.env.test?
+      FileUtils.rm_rf(Dir["#{Rails.root}/storage/spec_files"])
+    end
+  end
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -45,4 +51,3 @@ end
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 FactoryGirl.reload
-
