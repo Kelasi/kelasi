@@ -50,6 +50,10 @@ describe MediumUploader do
       it 'should set the file name in model', :vcr do
         expect(subject.model.file_name).to eq filename
       end
+
+      it 'should store uploaded files in a specific store_dir', :vcr do
+        expect(subject.store_dir).to eq "#{subject.mounted_as.to_s.pluralize}/"
+      end
     end
   end
 end
