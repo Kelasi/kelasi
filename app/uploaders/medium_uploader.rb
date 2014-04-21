@@ -10,6 +10,8 @@ class MediumUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
+  after :cache, :update_file_attributes
+
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -47,5 +49,12 @@ class MediumUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  protected
+    def update_file_attributes(new_file)
+      model.file_name = file.original_filename if file.original_filename
+      model.content_type = file.content_type
+      model.file_size = file.size
+    end
 
 end
