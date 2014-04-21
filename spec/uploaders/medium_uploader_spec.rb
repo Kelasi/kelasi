@@ -21,12 +21,22 @@ describe MediumUploader do
 
     context 'in the case of valid file' do
 
+      let(:filename) { "image.jpg" }
+
       before do
         subject.store! File.open(File.join(Rails.root, 'spec/support/files/image.jpg'))
       end
 
       it 'should make the file writable only to the owner and not executable', :vcr do
         expect(subject).to have_permissions 0644
+      end
+
+      it 'should change the file name to an UUID one and a specific directory structure', :vcr do
+        expect(subject.filename).to match /\w{8}-\w{4}-\w{4}-\w{4}-\w{12}.\w{1,}/
+
+        file_type = subject.content_type.split('/').first
+        random_folder = filename.first 2
+        expect(File.dirname(subject.filename)).to eq "#{file_type}/#{random_folder}"
       end
 
       it 'should set the file content_type in model', :vcr do
@@ -38,7 +48,7 @@ describe MediumUploader do
       end
 
       it 'should set the file name in model', :vcr do
-        expect(subject.model.file_name).to eq 'image.jpg'
+        expect(subject.model.file_name).to eq filename
       end
     end
   end

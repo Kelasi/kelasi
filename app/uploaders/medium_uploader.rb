@@ -48,9 +48,13 @@ class MediumUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+  def filename
+    file_type = file.content_type.split('/').first
+    random_folder = @filename[0,2]
+    random_name = "#{secure_token}.#{file.extension}" if original_filename.present?
+
+    "#{file_type}/#{random_folder}/#{random_name}"
+  end
 
   protected
     def update_file_attributes(new_file)
@@ -59,4 +63,8 @@ class MediumUploader < CarrierWave::Uploader::Base
       model.file_size = file.size
     end
 
+    def secure_token
+      ivar = :"@#{mounted_as}_secure_token"
+      model.instance_variable_get(ivar) or model.instance_variable_set(ivar, SecureRandom.uuid)
+    end
 end
