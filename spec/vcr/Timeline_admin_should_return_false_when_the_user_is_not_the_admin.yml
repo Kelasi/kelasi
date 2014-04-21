@@ -2,17 +2,46 @@
 http_interactions:
 - request:
     method: post
-    uri: http://localhost:9200/kelasi_test_users/user/2
+    uri: http://localhost:9200/kelasi_test_users/user/1
     body:
       encoding: UTF-8
-      string: '{"id":2,"first_name":"John","last_name":"Doe","universities":[],"current_universities":[]}'
+      string: '{"id":1,"first_name":"John","last_name":"Galt","universities":[],"current_universities":[]}'
     headers:
       Accept:
-      - '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
-      - '90'
+      - '91'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '78'
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"1","_version":1}'
+    http_version: 
+  recorded_at: Mon, 21 Apr 2014 21:52:25 GMT
+- request:
+    method: post
+    uri: http://localhost:9200/kelasi_test_users/user/1
+    body:
+      encoding: UTF-8
+      string: '{"id":1,"first_name":"John","last_name":"Galt","universities":[],"current_universities":[]}'
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '91'
       User-Agent:
       - Ruby
   response:
@@ -23,21 +52,50 @@ http_interactions:
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '79'
+      - '78'
     body:
       encoding: UTF-8
-      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"2","_version":63}'
+      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"1","_version":2}'
     http_version: 
-  recorded_at: Sat, 15 Mar 2014 12:17:49 GMT
+  recorded_at: Mon, 21 Apr 2014 21:52:25 GMT
 - request:
     method: post
-    uri: http://localhost:9200/kelasi_test_users/user/3
+    uri: http://localhost:9200/kelasi_test_users/user/2
     body:
       encoding: UTF-8
-      string: '{"id":3,"first_name":"John","last_name":"Doe","universities":[],"current_universities":[]}'
+      string: '{"id":2,"first_name":"John","last_name":"Doe","universities":[],"current_universities":[]}'
     headers:
       Accept:
-      - '*/*; q=0.5, application/xml'
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '90'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '78'
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"2","_version":1}'
+    http_version: 
+  recorded_at: Mon, 21 Apr 2014 21:52:26 GMT
+- request:
+    method: post
+    uri: http://localhost:9200/kelasi_test_users/user/2
+    body:
+      encoding: UTF-8
+      string: '{"id":2,"first_name":"John","last_name":"Doe","universities":[],"current_universities":[]}'
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
       Accept-Encoding:
       - gzip, deflate
       Content-Length:
@@ -55,7 +113,65 @@ http_interactions:
       - '78'
     body:
       encoding: UTF-8
-      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"3","_version":9}'
+      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"2","_version":2}'
     http_version: 
-  recorded_at: Sat, 15 Mar 2014 12:17:50 GMT
-recorded_with: VCR 2.8.0
+  recorded_at: Mon, 21 Apr 2014 21:52:26 GMT
+- request:
+    method: post
+    uri: http://localhost:9200/kelasi_test_users/user/3
+    body:
+      encoding: UTF-8
+      string: '{"id":3,"first_name":"John","last_name":"Doe","universities":[],"current_universities":[]}'
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '90'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '78'
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"3","_version":1}'
+    http_version: 
+  recorded_at: Mon, 21 Apr 2014 21:52:26 GMT
+- request:
+    method: post
+    uri: http://localhost:9200/kelasi_test_users/user/3
+    body:
+      encoding: UTF-8
+      string: '{"id":3,"first_name":"John","last_name":"Doe","universities":[],"current_universities":[]}'
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      Content-Length:
+      - '90'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=UTF-8
+      Content-Length:
+      - '78'
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"_index":"kelasi_test_users","_type":"user","_id":"3","_version":2}'
+    http_version: 
+  recorded_at: Mon, 21 Apr 2014 21:52:26 GMT
+recorded_with: VCR 2.9.0
