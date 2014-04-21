@@ -2,6 +2,8 @@
 
 class MediumUploader < CarrierWave::Uploader::Base
 
+  permissions 0644
+
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick

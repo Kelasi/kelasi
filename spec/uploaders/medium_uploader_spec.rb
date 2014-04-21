@@ -25,6 +25,10 @@ describe MediumUploader do
         subject.store! File.open(File.join(Rails.root, 'spec/support/files/image.jpg'))
       end
 
+      it 'should make the file writable only to the owner and not executable', :vcr do
+        expect(subject).to have_permissions 0644
+      end
+
       it 'should set the file content_type in model', :vcr do
         expect(subject.model.content_type).to eq subject.content_type
       end
