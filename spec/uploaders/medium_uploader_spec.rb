@@ -55,5 +55,16 @@ describe MediumUploader do
         expect(subject.store_dir).to eq "#{subject.mounted_as.to_s.pluralize}/"
       end
     end
+
+    context 'in the case of files with Farsi basename' do
+
+      before do
+        subject.store! File.open(File.join(Rails.root, 'spec/support/files/فارسی.doc'))
+      end
+
+      it 'should save the Farsi name as the file_name in model', :vcr do
+        expect(subject.model.file_name).to eq 'فارسی.doc'
+      end
+    end
   end
 end

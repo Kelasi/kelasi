@@ -2,6 +2,8 @@
 
 class MediumUploader < CarrierWave::Uploader::Base
 
+  CarrierWave::SanitizedFile.sanitize_regexp = /[^\w\u0600-\u06FF\.\-]/
+
   permissions 0644
 
   # Include RMagick or MiniMagick support:
