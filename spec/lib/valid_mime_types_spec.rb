@@ -9,7 +9,7 @@ describe :MIME do
     end
 
     it "should return valid extensions" do
-      expect(MIME::valid_extensions).to include MIME::Valid_types.values.first.first
+      expect(MIME::valid_extensions).to include MIME::Valid_types["image/jpeg"].first
     end
   end
 end
