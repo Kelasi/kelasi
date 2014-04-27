@@ -41,9 +41,17 @@ class MediumUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process :resize_to_fit => [50, 50]
-  # end
+  version :thumb, if: :image? do
+    process :resize_to_fill => [64, 64]
+  end
+
+  version :small, if: :image? do
+    process :resize_to_fit => [240, 240]
+  end
+
+  version :large, if: :image? do
+    process :resize_to_fit => [720, 720]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   def extension_white_list
@@ -61,6 +69,10 @@ class MediumUploader < CarrierWave::Uploader::Base
   end
 
   protected
+    def image?(new_file)
+      new_file.content_type.start_with? 'image'
+    end
+
     def update_file_attributes(new_file)
       model.file_name = file.original_filename if file.original_filename
       model.content_type = file.content_type

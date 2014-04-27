@@ -76,4 +76,36 @@ describe MediumUploader do
       end
     end
   end
+
+  context'MODE: enable_processing' do
+
+    before do
+      MediumUploader.enable_processing = true
+    end
+
+    after do
+      MediumUploader.enable_processing = false
+      subject.remove!
+    end
+
+    context 'in case of Image files' do
+
+      before do
+        medium.process_medium_upload = true
+        subject.store! File.open(File.join(Rails.root, 'spec/support/files/image.jpg'))
+      end
+
+      it 'should create a thumbnail version' do
+        subject.thumb.should have_dimensions 64, 64
+      end
+
+      it 'should create a small version' do
+        subject.small.should be_no_larger_than 240, 240
+      end
+
+      it 'should create a large version' do
+        subject.large.should be_no_larger_than 720, 720
+      end
+    end
+  end
 end
