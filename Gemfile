@@ -47,3 +47,4 @@ gem 'tire'
 gem 'kaminari'
 
 gem 'carrierwave'
+gem "mini_magick"
