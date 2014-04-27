@@ -47,4 +47,7 @@ gem 'tire'
 gem 'kaminari'
 
 gem 'carrierwave'
+gem 'carrierwave_backgrounder'
 gem "mini_magick"
+
+gem "resque", "~> 2.0.0.pre.1", github: "resque/resque"
