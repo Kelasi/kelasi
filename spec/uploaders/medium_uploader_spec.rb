@@ -95,16 +95,19 @@ describe MediumUploader do
         subject.store! File.open(File.join(Rails.root, 'spec/support/files/image.jpg'))
       end
 
-      it 'should create a thumbnail version' do
+      it 'should create a thumbnail version with quality 85' do
         subject.thumb.should have_dimensions 64, 64
+        expect(subject.thumb.get_quality).to eq 85
       end
 
-      it 'should create a small version' do
+      it 'should create a small version with quality 85' do
         subject.small.should be_no_larger_than 240, 240
+        expect(subject.small.get_quality).to eq 85
       end
 
-      it 'should create a large version' do
+      it 'should create a large version with quality 85' do
         subject.large.should be_no_larger_than 720, 720
+        expect(subject.large.get_quality).to eq 85
       end
     end
   end
