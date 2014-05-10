@@ -81,6 +81,8 @@ describe MediumUploader do
 
     before do
       MediumUploader.enable_processing = true
+      medium.process_medium_upload = true
+      subject.store! File.open(File.join(Rails.root, 'spec/support/files/image.jpg'))
     end
 
     after do
@@ -88,27 +90,19 @@ describe MediumUploader do
       subject.remove!
     end
 
-    context 'in case of Image files' do
-
-      before do
-        medium.process_medium_upload = true
-        subject.store! File.open(File.join(Rails.root, 'spec/support/files/image.jpg'))
-      end
-
-      it 'should create a thumbnail version with quality 85' do
-        subject.thumb.should have_dimensions 64, 64
+    it 'should create a thumbnail version with quality 85' do
+        expect(subject.thumb).to have_dimensions 64, 64
         expect(subject.thumb.get_quality).to eq 85
-      end
+    end
 
-      it 'should create a small version with quality 85' do
-        subject.small.should be_no_larger_than 240, 240
+    it 'should create a small version with quality 85' do
+        expect(subject.small).to be_no_larger_than 240, 240
         expect(subject.small.get_quality).to eq 85
-      end
+    end
 
-      it 'should create a large version with quality 85' do
-        subject.large.should be_no_larger_than 720, 720
+    it 'should create a large version with quality 85' do
+        expect(subject.large).to be_no_larger_than 720, 720
         expect(subject.large.get_quality).to eq 85
-      end
     end
   end
 end
