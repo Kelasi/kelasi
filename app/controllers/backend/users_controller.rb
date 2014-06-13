@@ -1,8 +1,4 @@
 class Backend::UsersController < Backend::BackendController
-  def index
-    @users = User.all
-  end
-
   def show
     @user = User.new
     # @user = User.find params[:id]
