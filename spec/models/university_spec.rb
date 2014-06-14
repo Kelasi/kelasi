@@ -10,12 +10,12 @@ describe University do
   subject {@uni}
 
   it 'should have atendances', :vcr do
-    expect(subject.respond_to? :atendances).to be_true
+    expect(subject.respond_to? :atendances).to be_truthy
     expect(subject.atendances).to eq [@atendance]
   end
 
   it 'should have users', :vcr do
-    expect(subject.respond_to? :users).to be_true
+    expect(subject.respond_to? :users).to be_truthy
     expect(subject.users).to eq [@user]
   end
 end

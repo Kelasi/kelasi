@@ -44,12 +44,12 @@ describe User do
     subject { user }
 
     it 'should have atendances', :vcr do
-      expect(subject.respond_to? :atendances).to be_true
+      expect(subject.respond_to? :atendances).to be_truthy
       expect(subject.atendances).to eq [atendance]
     end
 
     it 'should have universities', :vcr do
-      expect(subject.respond_to? :universities).to be_true
+      expect(subject.respond_to? :universities).to be_truthy
       expect(subject.universities).to eq [university]
     end
 
@@ -58,7 +58,7 @@ describe User do
     end
 
     it "should have an introducer", :vcr do
-      expect(introduced_user.respond_to? :introducer).to be_true
+      expect(introduced_user.respond_to? :introducer).to be_truthy
       expect(introduced_user.introducer).to eq user
     end
 
@@ -74,12 +74,12 @@ describe User do
     let(:timeline) { user.timelines.first }
 
     it "should return true if the user is the admin of the timeline", :vcr do
-      expect(user.admin? timeline).to be_true
+      expect(user.admin? timeline).to be_truthy
     end
 
     it "should return false if the user is not the admin", :vcr do
       random_user = FactoryGirl.create :user
-      expect(random_user.admin? timeline).to be_false
+      expect(random_user.admin? timeline).to be_falsey
     end
   end
 
@@ -129,7 +129,7 @@ describe User do
     subject { User.search user.first_name }
 
     it 'should not contain root in json', :vcr do
-      expect(User.include_root_in_json).to be_false
+      expect(User.include_root_in_json).to be_falsey
     end
 
     it 'should have Tire functionality', :vcr do
@@ -137,22 +137,22 @@ describe User do
     end
 
     it 'should have id in search results', :vcr do
-      expect(subject.results.last.respond_to? :id).to be_true
+      expect(subject.results.last.respond_to? :id).to be_truthy
       expect(subject.results.map {|m| m.id}).to include user.id.to_s
     end
 
     it 'should have first_name in search results', :vcr do
-      expect(subject.results.last.respond_to? :first_name).to be_true
+      expect(subject.results.last.respond_to? :first_name).to be_truthy
       expect(subject.results.map {|m| m.first_name}).to include user.first_name
     end
 
     it 'should have last_name in search results', :vcr do
-      expect(subject.results.last.respond_to? :last_name).to be_true
+      expect(subject.results.last.respond_to? :last_name).to be_truthy
       expect(subject.results.map {|m| m.last_name}).to include user.last_name
     end
 
     it 'should have universities in search results', :vcr do
-      expect(subject.results.last.respond_to? :universities).to be_true
+      expect(subject.results.last.respond_to? :universities).to be_truthy
       expect(subject.results.map {|m| m.universities}.flatten).to include uni_normalize university.name
     end
 

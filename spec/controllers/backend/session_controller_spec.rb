@@ -4,13 +4,13 @@ describe Backend::SessionController do
 
   describe "GET 'show'" do
 
-    let(:user) { stub_model User }
+    let(:user) { FactoryGirl.create :user }
 
     context "logged in" do
 
       before { login_user user }
 
-      it "should set the user and return success" do
+      it "should set the user and return success", :vcr do
         get 'show'
         expect(assigns :user).to eq user
         expect(response).to be_success
@@ -50,8 +50,8 @@ describe Backend::SessionController do
   end
 
   describe "DELETE 'destroy'" do
-    it "should logout" do
-      login_user stub_model(User)
+    it "should logout", :vcr do
+      login_user FactoryGirl.create :user
       delete 'destroy'
       expect(response).to be_success
       get 'show'

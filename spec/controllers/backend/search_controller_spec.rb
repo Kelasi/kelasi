@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Backend::SearchController do
 
-  describe :people do
+  describe '#people' do
 
     let(:user) { FactoryGirl.create :user_with_university }
 
@@ -20,7 +20,7 @@ describe Backend::SearchController do
     end
   end
 
-  describe :timelines do
+  describe '#timelines' do
 
     let(:timeline) { FactoryGirl.create :timeline,
                        title: 'Some wierd timeline' }

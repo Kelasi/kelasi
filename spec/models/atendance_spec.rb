@@ -8,12 +8,12 @@ describe Atendance do
   subject {@user.atendances.first}
 
   it 'should have a user', :vcr do
-    expect(subject.respond_to? :user).to be_true
+    expect(subject.respond_to? :user).to be_truthy
     expect(subject.user).to eq @user
   end
 
   it 'should have a university', :vcr do
-    expect(subject.respond_to? :university).to be_true
+    expect(subject.respond_to? :university).to be_truthy
     expect(subject.university).to eq @user.universities.first
   end
 end

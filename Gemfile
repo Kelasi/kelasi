@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 ruby '2.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0.rc1'
+gem 'rails', '4.1.1'
 
 gem 'sorcery'
 
@@ -22,7 +22,7 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'rspec-rails', '~> 2.0'
+  gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
   gem 'jazz_hands'
   gem 'pry-plus'
@@ -35,7 +35,7 @@ group :test do
 end
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.5.2'
+gem 'jbuilder'
 
 # Use 'Phusion Passenger' as the app server
 gem 'passenger', group: :production
