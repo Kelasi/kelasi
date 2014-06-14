@@ -13,9 +13,13 @@ Kelasi::Application.routes.draw do
     resources :posts,   only: [:show, :update, :destroy]
 
     resource :session, only: [:show, :create, :destroy], controller: 'session'
-    post 'search', to: 'search#search'
     get '/profile/:profile_name', to: 'profiles#show'
     get '/stream', to: 'streams#index'
+
+    scope 'search' do
+      post 'people',    to: 'search#people'
+      post 'timelines', to: 'search#timelines'
+    end
   end
 
   get '*path' => redirect('/')
