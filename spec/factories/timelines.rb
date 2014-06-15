@@ -6,12 +6,13 @@ FactoryGirl.define do
 
     factory :timeline_with_member, aliases: [:timeline_with_admin] do
       ignore do
-        admin { create :user }
+        user { create :user }
+        role { TimelineUserPermission::Roles::ADMIN }
       end
 
       after(:create) do |timeline, evaluator|
         timeline.timeline_user_permissions.create(
-          user: evaluator.admin, role: TimelineUserPermission::Roles::ADMIN
+          user: evaluator.user, role: evaluator.role
         )
       end
 
