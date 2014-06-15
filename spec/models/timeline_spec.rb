@@ -80,7 +80,7 @@ describe Timeline do
   end
 
   context :recent_posts do
-    it "should return the last 20 post orderly" do
+    it "should return the last 20 post orderly", :vcr do
       timeline = FactoryGirl.create :timeline
       posts = FactoryGirl.create_list :timeline_post, 25,
         timeline: timeline

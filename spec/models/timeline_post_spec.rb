@@ -45,11 +45,11 @@ describe TimelinePost do
 
     subject { TimelinePost.all }
 
-    it "should not have the deactive post" do
+    it "should not have the deactive post", :vcr do
       expect(subject).not_to include @deactive
     end
 
-    it "should have the active post as the first post" do
+    it "should have the active post as the first post", :vcr do
       expect(subject.first).to eq @active
     end
   end

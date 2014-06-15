@@ -36,7 +36,7 @@ describe Backend::StreamsController do
         end
       end
 
-      it "should return posts orderly" do
+      it "should return posts orderly", :vcr do
         get 'index'
         expect(response).to be_success
         expect(assigns :stream_elements).to eq @posts.reverse[0..19]
