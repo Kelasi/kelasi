@@ -9,7 +9,7 @@ class TimelinePost < ActiveRecord::Base
     AllStates   = Array(1..2)
   end
 
-  scope :active_posts, -> { where(state: States::ACTIVE) }
+  default_scope { where(state: States::ACTIVE).order('updated_at desc') }
 
   belongs_to :user
   belongs_to :timeline

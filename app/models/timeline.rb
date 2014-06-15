@@ -12,13 +12,17 @@ class Timeline < ActiveRecord::Base
   def self.create!(title: required('title'), admin: required('admin'))
     timeline = self.new title: title.to_s
     timeline.save!
-    timeline.timeline_user_permissions.create user: admin, role: TimelineUserPermission::Roles::ADMIN
+    timeline.timeline_user_permissions.create(
+      user: admin, role: TimelineUserPermission::Roles::ADMIN
+    )
     timeline
   end
 
   def admin?(user)
-    return true if self.timeline_user_permissions.where(role: TimelineUserPermission::Roles::ADMIN
-                                                       ).map(&:user).include? user
+    self.timeline_user_permissions.where(
+      user: user,
+      role: TimelineUserPermission::Roles::ADMIN
+    ).any?
   end
 
   def add_member(user, options={})
@@ -30,5 +34,9 @@ class Timeline < ActiveRecord::Base
 
   def role?(user)
     timeline_user_permissions.find_by(user: user).role
+  end
+
+  def recent_posts
+    timeline_posts.limit(20)
   end
 end

@@ -78,4 +78,13 @@ describe Timeline do
         .to eq TimelineUserPermission::Roles::PARTICIPANTS
     end
   end
+
+  context :recent_posts do
+    it "should return the last 20 post orderly" do
+      timeline = FactoryGirl.create :timeline
+      posts = FactoryGirl.create_list :timeline_post, 25,
+        timeline: timeline
+      expect(timeline.recent_posts).to eq posts.reverse[0..19]
+    end
+  end
 end

@@ -4,7 +4,7 @@ class Backend::PostsController < Backend::BackendController
   before_filter :current_user_post, only: [:update, :destroy]
 
   def index
-    @timeline_posts = TimelinePost.active_posts.where params.permit(:timeline_id)
+    @timeline_posts = TimelinePost.where params.permit(:timeline_id)
   end
 
   def show

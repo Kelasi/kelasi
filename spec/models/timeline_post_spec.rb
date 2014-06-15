@@ -33,4 +33,24 @@ describe TimelinePost do
       expect(subject).to be_invalid
     end
   end
+
+  context 'default scope' do
+
+    before do
+      FactoryGirl.create_list :timeline_post, 5
+      @active = FactoryGirl.create :timeline_post
+      @deactive = FactoryGirl.create :timeline_post
+      @deactive.update! state: TimelinePost::States::DEACTIVE
+    end
+
+    subject { TimelinePost.all }
+
+    it "should not have the deactive post" do
+      expect(subject).not_to include @deactive
+    end
+
+    it "should have the active post as the first post" do
+      expect(subject.first).to eq @active
+    end
+  end
 end
