@@ -32,6 +32,8 @@ class Backend::TimelinesController < Backend::BackendController
 
     def current_user_timeline
       @timeline = current_user.timelines.find_by params.permit(:id)
-      head :unauthorized if @timeline.nil?
+      unless @timeline.present? and @timeline.admin? current_user
+        head :unauthorized
+      end
     end
 end

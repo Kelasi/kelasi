@@ -29,9 +29,16 @@ FactoryGirl.define do
     end
 
     factory :user_with_timeline do
-      after(:create) do |user|
-        timeline = FactoryGirl.create :timeline
-        user.timeline_user_permissions.create({ timeline: timeline, role: TimelineUserPermission::Roles::ADMIN })
+      ignore do
+        timeline { FactoryGirl.create :timeline }
+        role     { TimelineUserPermission::Roles::ADMIN }
+      end
+
+      after(:create) do |user, evaluator|
+        user.timeline_user_permissions.create(
+          timeline: evaluator.timeline,
+          role: evaluator.role
+        )
       end
     end
   end

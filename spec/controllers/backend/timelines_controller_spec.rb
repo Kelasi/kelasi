@@ -59,8 +59,10 @@ describe Backend::TimelinesController do
     end
 
     it "should unable to update timeline when user is not timeline admin", :vcr do
-      @user = FactoryGirl.create :user
-      login_user( user= @user )
+      @user = FactoryGirl.create :user_with_timeline,
+        timeline: @timeline,
+        role: TimelineUserPermission::Roles::PARTICIPANTS
+      login_user @user
       put 'update', id: @timeline.id, title: "NewTitle"
       expect(response).not_to be_success
     end
