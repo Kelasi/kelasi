@@ -3,20 +3,21 @@ require 'spec_helper'
 describe Backend::UsersController do
 
   describe "GET 'show'" do
+
     it "returns http success" do
       get 'show', id: 1
       response.should be_success
     end
-  end
 
-  describe "PUT 'update'" do
-    it "returns http success" do
-      put 'update', id: 1
-      response.should be_success
+    it "should return the correct user", :vcr do
+      user = FactoryGirl.create :user
+      get 'show', id: user.id
+      expect(assigns :user).to eq user
     end
   end
 
   describe "POST 'create'" do
+
     it "should create a new user with right params", :vcr do
       u = FactoryGirl.create :user_with_university
       params = {
@@ -40,12 +41,4 @@ describe Backend::UsersController do
       expect(response).not_to be_success
     end
   end
-
-  describe "DELETE 'destroy'" do
-    it "returns http success" do
-      delete 'destroy', id: 1
-      response.should be_success
-    end
-  end
-
 end

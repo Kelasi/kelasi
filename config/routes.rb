@@ -1,7 +1,7 @@
 Kelasi::Application.routes.draw do
 
   scope 'api_', module: :backend, defaults: {format: 'json'} do
-    resources :users, except: [:index] do
+    resources :users, except: [:index, :new, :edit, :update, :destroy] do
       get 'timelines', to: 'timelines#index'
     end
 
