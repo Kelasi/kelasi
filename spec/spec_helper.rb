@@ -40,7 +40,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
-  config.include Sorcery::TestHelpers::Rails
+  config.include Sorcery::TestHelpers::Rails::Controller, type: :controller
 
   config.after :all do
     if Rails.env.test?
