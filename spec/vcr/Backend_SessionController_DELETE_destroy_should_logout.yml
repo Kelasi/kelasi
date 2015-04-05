@@ -26,9 +26,9 @@ http_interactions:
       - '84'
     body:
       encoding: UTF-8
-      string: '{"_index":"kelasi_test_users","_type":"user","_id":"1","_version":7,"created":false}'
+      string: '{"_index":"kelasi_test_users","_type":"user","_id":"1","_version":3,"created":false}'
     http_version: 
-  recorded_at: Sun, 05 Apr 2015 21:03:48 GMT
+  recorded_at: Sun, 05 Apr 2015 20:58:51 GMT
 - request:
     method: post
     uri: http://localhost:9200/kelasi_test_users/user/1
@@ -55,9 +55,9 @@ http_interactions:
       - '84'
     body:
       encoding: UTF-8
-      string: '{"_index":"kelasi_test_users","_type":"user","_id":"1","_version":8,"created":false}'
+      string: '{"_index":"kelasi_test_users","_type":"user","_id":"1","_version":4,"created":false}'
     http_version: 
-  recorded_at: Sun, 05 Apr 2015 21:03:48 GMT
+  recorded_at: Sun, 05 Apr 2015 20:58:51 GMT
 - request:
     method: post
     uri: http://localhost:9200/kelasi_test_users/user/2
@@ -84,9 +84,9 @@ http_interactions:
       - '84'
     body:
       encoding: UTF-8
-      string: '{"_index":"kelasi_test_users","_type":"user","_id":"2","_version":7,"created":false}'
+      string: '{"_index":"kelasi_test_users","_type":"user","_id":"2","_version":3,"created":false}'
     http_version: 
-  recorded_at: Sun, 05 Apr 2015 21:03:49 GMT
+  recorded_at: Sun, 05 Apr 2015 20:58:51 GMT
 - request:
     method: post
     uri: http://localhost:9200/kelasi_test_users/user/2
@@ -113,7 +113,7 @@ http_interactions:
       - '84'
     body:
       encoding: UTF-8
-      string: '{"_index":"kelasi_test_users","_type":"user","_id":"2","_version":8,"created":false}'
+      string: '{"_index":"kelasi_test_users","_type":"user","_id":"2","_version":4,"created":false}'
     http_version: 
-  recorded_at: Sun, 05 Apr 2015 21:03:49 GMT
+  recorded_at: Sun, 05 Apr 2015 20:58:51 GMT
 recorded_with: VCR 2.9.2
