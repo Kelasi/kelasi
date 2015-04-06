@@ -10,5 +10,5 @@ class Medium < ActiveRecord::Base
   validates :content_type, presence: true
   validates :file_name, presence: true
   validates :file_size, presence: true
-  validates :medium, file_size: { maximum: (Rails.env.test? ? 0.6.megabytes.to_i : 5.megabytes.to_i) }
+  validates :medium, file_size: { maximum: 5.megabytes.to_i }
 end
