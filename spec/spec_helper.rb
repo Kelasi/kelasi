@@ -4,7 +4,9 @@ require 'rubygems'
 ENV["RAILS_ENV"] ||= 'test'
 
 require 'webmock/rspec'
-WebMock.disable_net_connect!(:allow_localhost => true)
+WebMock::stub_request(:head, "http://localhost:9200/kelasi_test_users").
+  with(:headers => {'Accept'=>'*/*; q=0.5, application/xml', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby'}).
+  to_return(:status => 200, :body => "", :headers => {})
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
