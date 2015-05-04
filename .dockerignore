@@ -1,0 +1,7 @@
+.git/
+.rvm/
+.idea/
+bin/
+
+.envrc
+.travis.yml
