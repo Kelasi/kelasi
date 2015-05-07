@@ -1,7 +1,8 @@
 .git/
 .rvm/
 .idea/
-bin/
 
 .envrc
 .travis.yml
+
+db/*.sqlite3
